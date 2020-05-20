@@ -35,12 +35,12 @@ export const rounded = {
 	borderRadius: 50
 };
 
-export const selected = {
-	backgroundColor: Colors.selected
+export const enabled = {
+	backgroundColor: Colors.enabled
 };
 
-export const unselected = {
-	backgroundColor: Colors.unselected
+export const disabled = {
+	backgroundColor: Colors.disabled
 };
 
 export const smallRounded = {

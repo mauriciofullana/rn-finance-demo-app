@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import LoginScreen from '../../screens/auth/LoginScreen';
