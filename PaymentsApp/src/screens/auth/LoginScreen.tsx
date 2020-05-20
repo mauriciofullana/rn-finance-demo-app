@@ -6,7 +6,8 @@ import {
 	ScrollView,
 	TextInput,
 	TouchableOpacity,
-	Image
+	Image,
+	KeyboardAvoidingView
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
@@ -49,7 +50,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 						source={require('../../../assets/logo.png')}
 					/>
 				</View>
-				<View style={styles.formContainer}>
+				<KeyboardAvoidingView behavior={'padding'} style={styles.formContainer}>
 					<View style={styles.inputCotainer}>
 						<FontAwesome
 							style={styles.inputIcon}
@@ -94,7 +95,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 					>
 						<Text style={styles.signinButtonText}>¿Olvidó su contraseña?</Text>
 					</TouchableOpacity>
-				</View>
+				</KeyboardAvoidingView>
 			</View>
 		</ScrollView>
 	);

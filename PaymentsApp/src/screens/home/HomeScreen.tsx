@@ -1,6 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+	MaterialCommunityIcons,
+	MaterialIcons,
+	FontAwesome
+} from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
 
@@ -8,10 +12,32 @@ const HomeScreen: FunctionComponent = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.welcome}>
-				<Text>Bienvenido</Text>
+				<TouchableOpacity style={styles.welcomePicContainer}>
+					{/* <FontAwesome
+						name="user-circle-o"
+						color={Colors.mediumGray}
+						size={80}
+					/> */}
+					<Image
+						style={styles.img}
+						source={require('../../../assets/chino.png')}
+					/>
+				</TouchableOpacity>
+				<View style={styles.welcomeTextContainer}>
+					<View style={{ flexDirection: 'row', marginBottom: 5 }}>
+						<Text style={{ fontSize: 17 }}>Bienvenido, </Text>
+						<Text style={{ fontWeight: 'bold', fontSize: 17 }}>
+							Álvaro Recoba
+						</Text>
+					</View>
+					<Text style={{ fontSize: 12 }}>Último acceso: 20 May 14:48</Text>
+					<Text style={{ fontSize: 12 }}>
+						Último cambio de contraseña: 7 May 14:22
+					</Text>
+				</View>
 			</View>
 			<TouchableOpacity style={styles.section}>
-				<View style={{ flex: 1, alignItems: 'flex-end' }}>
+				<View style={styles.iconContainer}>
 					<MaterialCommunityIcons
 						style={styles.icon}
 						name="qrcode-scan"
@@ -25,7 +51,7 @@ const HomeScreen: FunctionComponent = () => {
 			</TouchableOpacity>
 			<View style={styles.divider} />
 			<TouchableOpacity style={styles.section}>
-				<View style={{ flex: 1, alignItems: 'flex-end' }}>
+				<View style={styles.iconContainer}>
 					<MaterialIcons
 						style={styles.icon}
 						name="attach-money"
@@ -39,7 +65,7 @@ const HomeScreen: FunctionComponent = () => {
 			</TouchableOpacity>
 			<View style={styles.divider} />
 			<TouchableOpacity style={styles.section}>
-				<View style={{ flex: 1, alignItems: 'flex-end' }}>
+				<View style={styles.iconContainer}>
 					<MaterialCommunityIcons
 						style={styles.icon}
 						name="format-list-bulleted"
@@ -62,16 +88,38 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.screenBackground
 	},
 	welcome: {
+		flex: 1.1,
+		flexDirection: 'row',
+		paddingHorizontal: 15,
+		// alignItems: 'center',
+		backgroundColor: 'white'
+	},
+	welcomePicContainer: {
+		justifyContent: 'center'
+	},
+	img: {
+		width: 95,
+		height: 95,
+		borderRadius: 50,
+		borderColor: Colors.mediumGray,
+		borderWidth: 1
+	},
+	welcomeTextContainer: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
+		paddingVertical: 25,
+		marginLeft: 10,
+		justifyContent: 'center'
 	},
 	section: {
-        flex: 1.3,
-        paddingRight: 30,
+		flex: 1,
+		paddingRight: 30,
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	iconContainer: {
+		flex: 1,
+		alignItems: 'flex-end'
 	},
 	divider: {
 		marginHorizontal: 50,
