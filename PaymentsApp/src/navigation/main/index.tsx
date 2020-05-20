@@ -11,7 +11,7 @@ const AuthStackNavigator: FunctionComponent = () => {
 		<MainStack.Navigator
 			initialRouteName="Home"
 			screenOptions={{
-                headerTransparent: true,
+                headerTransparent: false,
                 headerTitle: () => null
 			}}
 		>
