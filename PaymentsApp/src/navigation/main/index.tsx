@@ -1,63 +1,30 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, TouchableOpacity, Image, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useDispatch } from 'react-redux';
 
+import { logout } from '../../state/auth/actions';
 import HomeScreen from '../../screens/home/HomeScreen';
-import { MainStackParamList } from './types';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { MainStackParamList, HomeScreenNavigationProp } from './types';
+import { screenHeaderOptions } from '../CommonHeaderOption';
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
 const MainStackkNavigator: FunctionComponent = () => {
+	const dispatch = useDispatch();
+
+	const logOut = () => {
+		dispatch(logout());
+	};
+
+
 	return (
 		<MainStack.Navigator
 			initialRouteName="Home"
-			screenOptions={{
-				headerTransparent: false,
-				headerTitle: () => null,
-                headerTitleStyle: {flex: 1, textAlign: 'center'},
-				headerLeft: () => {
-					return (
-                        <View style={{flexDirection: 'row'}}>
-                            <TouchableOpacity style={styles.headerIconContainer}>
-                                <Ionicons style={styles.hederMenuIcon} name="md-menu" size={28} />
-                            </TouchableOpacity>
-                            <Image
-                                style={styles.img}
-                                source={require('../../../assets/logoHeader.png')}
-                            />
-                        </View>
-					);
-                },
-                headerRight: () => {
-                    return (
-						<TouchableOpacity style={styles.headerIconContainer}>
-							<Ionicons style={styles.hederMenuIcon} name="ios-log-out" size={28} />
-						</TouchableOpacity>
-					);
-                }
-			}}
+			screenOptions={screenHeaderOptions(logOut)}
 		>
 			<MainStack.Screen name="Home" component={HomeScreen} />
 		</MainStack.Navigator>
 	);
 };
-
-const styles = StyleSheet.create({
-	hederMenuIcon: {
-		color: Colors.black
-	},
-	headerIconContainer: {
-		marginHorizontal: 15
-    },
-    headerTitle: {
-        alignItems: 'center'
-    },
-    img: {
-		width: 110,
-		height: 32,
-	},
-});
 
 export default MainStackkNavigator;

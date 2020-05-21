@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import { authSelector } from '../state/selectors';
 import AuthStackNavigator from './auth';
-import MainStackNavigator from './main';
+import PrivateDrawer from './PrivateDrawer';
 
 const Navigator: FunctionComponent = () => {
 
@@ -13,7 +13,7 @@ const Navigator: FunctionComponent = () => {
     return (
         <NavigationContainer>
             {!isSignedIn && <AuthStackNavigator />}
-            {isSignedIn && <MainStackNavigator />}
+            {isSignedIn && <PrivateDrawer />}
         </NavigationContainer>
     );
 };
