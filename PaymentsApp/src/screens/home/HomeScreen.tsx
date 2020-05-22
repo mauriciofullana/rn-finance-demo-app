@@ -8,8 +8,13 @@ import {
 } from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
+import { HomeScreenNavigationProp } from '../../navigation/main/types';
 
-const HomeScreen: FunctionComponent = () => {
+interface HomeScreenProps {
+	navigation: HomeScreenNavigationProp;
+}
+
+const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.welcome}>
@@ -65,7 +70,10 @@ const HomeScreen: FunctionComponent = () => {
 				</View>
 			</TouchableOpacity>
 			<View style={styles.divider} />
-			<TouchableOpacity style={styles.section}>
+			<TouchableOpacity
+				onPress={() => navigation.navigate('Movements')}
+				style={styles.section}
+			>
 				<View style={styles.iconContainer}>
 					<MaterialCommunityIcons
 						style={styles.icon}
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
 	},
 	iconContainer: {
 		flex: 1,
-		alignItems: 'flex-end',
+		alignItems: 'flex-end'
 	},
 	divider: {
 		marginHorizontal: 50,
