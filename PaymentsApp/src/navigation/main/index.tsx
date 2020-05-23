@@ -8,6 +8,7 @@ import MovementsScreen from '../../screens/movements/MovementsScreen';
 import { MainStackParamList, HomeScreenNavigationProp } from './types';
 import { screenHeaderOptions } from '../CommonHeaderOption';
 import { Colors } from '../../styles';
+import { Platform } from 'react-native';
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -32,7 +33,10 @@ const MainStackkNavigator: FunctionComponent = () => {
 					title:"Movimientos",
 					headerTintColor: 'white',
 					headerStyle: {
-						backgroundColor: Colors.screenBackground
+						backgroundColor: Colors.screenBackground,
+					},
+					headerTitleStyle: {
+						fontSize: 18
 					}
 				}}
 			/>

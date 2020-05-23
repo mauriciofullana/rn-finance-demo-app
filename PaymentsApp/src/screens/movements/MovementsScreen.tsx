@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import { Colors } from '../../styles';
@@ -17,7 +17,7 @@ const MovementsScreen: FunctionComponent = () => {
 		{
             id: 2,
             holder: 'Sebastian Fernandéz',
-			reference: 'Pago Colegio',
+			reference: 'Alquiler casa Montevideo',
 			date: new Date(),
 			amount: 680.00,
 			isDebit: true
@@ -25,7 +25,7 @@ const MovementsScreen: FunctionComponent = () => {
 		{
             id: 3,
             holder: 'Horacio Peralta',
-			reference: 'Pago Colegio',
+			reference: 'Test credito',
 			date: new Date(),
 			amount: 15500.00,
 			isDebit: false
@@ -33,7 +33,7 @@ const MovementsScreen: FunctionComponent = () => {
 		{
             id: 4,
             holder: 'Alvaro Recoba',
-			reference: 'Pago Colegio',
+			reference: 'Pago por clase de tiros libres',
 			date: new Date(),
 			amount: 15500.00,
 			isDebit: true
@@ -41,7 +41,7 @@ const MovementsScreen: FunctionComponent = () => {
 		{
             id: 5,
             holder: 'Luis Suarez',
-			reference: 'Pago Colegio',
+			reference: 'Referencia',
 			date: new Date(),
 			amount: 50600.00,
 			isDebit: false
@@ -49,28 +49,54 @@ const MovementsScreen: FunctionComponent = () => {
 		{
             id: 6,
             holder: 'Edi Cavani',
-			reference: 'Pago Colegio',
+			reference: 'Salario Club Nacional de Football',
+			date: new Date(),
+			amount: 3000.00,
+			isDebit: true
+		},
+		{
+            id: 7,
+            holder: 'Edi Cavani',
+			reference: 'Salario Club Nacional de Football',
+			date: new Date(),
+			amount: 3000.00,
+			isDebit: true
+		},
+		{
+            id: 8,
+            holder: 'Edi Cavani',
+			reference: 'Salario Club Nacional de Football',
 			date: new Date(),
 			amount: 3000.00,
 			isDebit: true
 		}
 	];
 
+	const [refreshing, setRefreshing] = useState(false);
+	const [term, setTerm] = useState('');
+    const [results, setResults] = useState(movements);
+
+    useEffect(() => {
+        setResults(movements.filter(item => {
+            return term === '' || item.reference.toLowerCase().includes(term.toLowerCase()) || item.holder.toLowerCase().includes(term.toLowerCase());
+        }))
+    }, [term])
+
 	const renderMovements = (movement: any) => {
 		return (
-			<View style={{ flex: 1, height: 60, flexDirection: 'row', alignItems: 'center' }}>
-				<View style={{marginRight: 10, marginLeft: 5}}>
+			<View style={{ flex: 1, height: 80, flexDirection: 'row', alignItems: 'center' }}>
+				<View style={{marginRight: 15, marginLeft: 10}}>
 					<Ionicons
 						name={movement.isDebit ? 'ios-arrow-forward' : 'ios-arrow-back'}
 						size={20}
 						color={movement.isDebit ? '#bd0000' : 'green'}
 					/>
 				</View>
-                <View>
+				<View style={{flex: 1, alignItems: 'flex-start'}}>
 				    <Text style={{fontWeight: 'bold'}}>{movement.holder}</Text>
                     <Text>{movement.reference}</Text>
                 </View>
-                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                <View style={{flex: 1, alignItems: 'flex-end', marginRight: 10}}>
                     <Text style={{fontSize: 20 ,color: movement.isDebit ? '#bd0000' : 'gray'}}>Bs {movement.isDebit ? '-' : ''}{movement.amount}</Text>
                 </View>
 			</View>
@@ -83,12 +109,21 @@ const MovementsScreen: FunctionComponent = () => {
 		);
 	};
 
+	const onRefresh = () => {
+		setRefreshing(true);
+		setTimeout(() => {
+			setRefreshing(false);
+			setResults(movements);
+		}, 2000);
+	};
+
 	return (
 		<View style={styles.container}>
-			<SearchBar term="" onTermChange={() => {}} />
+			<SearchBar term={term} onTermChange={setTerm} />
 			<FlatList
-				// style={{ marginTop: 15 }}
-				data={movements}
+				data={results}
+				onRefresh={onRefresh}
+				refreshing={refreshing}
 				keyExtractor={movement => movement.id.toString()}
 				renderItem={movement => renderMovements(movement.item)}
 				ItemSeparatorComponent={renderSeparator}
@@ -100,7 +135,6 @@ const MovementsScreen: FunctionComponent = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		//alignItems: 'center',
 		backgroundColor: Colors.white,
 		paddingHorizontal: 15
 	}
