@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '../styles';
 import { useNavigation } from '@react-navigation/native';
+
+import { Colors } from '../styles';
 import { PrivateDrawerNavigationProp } from './types';
 
 

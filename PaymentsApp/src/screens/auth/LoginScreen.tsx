@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.screenBackground
 	},
 	container: {
-		marginTop: 80,
+		marginTop: 90,
 		paddingHorizontal: 25
 	},
 	logoContainer: {

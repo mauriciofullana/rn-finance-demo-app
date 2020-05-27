@@ -40,7 +40,7 @@ export const enabled = {
 };
 
 export const disabled = {
-	backgroundColor: Colors.disabled
+	backgroundColor: Colors.mainDisabled
 };
 
 export const smallRounded = {
