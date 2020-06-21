@@ -19,6 +19,8 @@ import { Colors, Buttons } from '../../styles';
 import { LoginScreenNavigationProp } from '../../navigation/auth/types';
 import Spinner from '../../components/Spinner';
 import CommonError from '../../components/CommonError';
+import { loginText } from '../../styles/typography';
+import { base } from '../../styles/buttons';
 
 interface LoginProps {
 	navigation: LoginScreenNavigationProp;
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
 	},
 	logoContainer: {
 		alignItems: 'center',
-		marginBottom: 100
+		marginBottom: 150
 	},
 	img: {
 		width: '80%',
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
-		borderBottomColor: Colors.white,
+		borderBottomColor: Colors.baseText,
 		borderBottomWidth: 0.6,
 		marginBottom: 20
 	},
@@ -134,23 +136,18 @@ const styles = StyleSheet.create({
 		padding: 5
 	},
 	inputBox: {
-		flex: 1,
-		fontSize: 16,
-		color: Colors.white,
+		...loginText,
 		paddingTop: 10,
 		paddingRight: 10,
 		paddingBottom: 10,
 		paddingLeft: 10
 	},
 	signupButton: {
-		backgroundColor: Buttons.enabled.backgroundColor,
-		alignItems: 'center',
-		justifyContent: 'center',
+		...Buttons.base,
 		marginTop: 25,
 		marginBottom: 20,
-		borderRadius: 10,
-		height: 50,
-		width: '100%'
+
+		//width: '100%'
 	},
 	signupButtonDisabled : {
 		backgroundColor: Buttons.disabled.backgroundColor

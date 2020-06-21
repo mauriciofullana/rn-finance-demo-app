@@ -45,6 +45,11 @@ export const screenHeader = {
 	fontWeight: 'bold'
 };
 
+export const loginText = {
+	color: Colors.loginText,
+	fontSize: baseFontSize
+}
+
 export const screenFooter = {
 	...base,
 	...descriptionText

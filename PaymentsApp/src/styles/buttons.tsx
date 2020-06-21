@@ -3,9 +3,11 @@ import * as Typography from './typography';
 import * as Spacing from './spacing';
 
 export const base = {
+	backgroundColor: Colors.enabled,
 	alignItems: 'center',
-	marginRight: Spacing.smallest,
-	marginVertical: Spacing.tiny
+	justifyContent: 'center',
+	borderRadius: 10,
+	height: 50,
 };
 
 export const text = {

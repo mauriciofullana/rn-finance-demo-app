@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { useSelector } from "react-redux";
 
 import { authSelector } from '../state/selectors';
@@ -11,6 +11,7 @@ const Navigator: FunctionComponent = () => {
     const { isSignedIn } = useSelector(authSelector);
 
     return (
+        // <NavigationContainer theme={DarkTheme}>
         <NavigationContainer>
             {!isSignedIn && <AuthStackNavigator />}
             {isSignedIn && <PrivateDrawer />}

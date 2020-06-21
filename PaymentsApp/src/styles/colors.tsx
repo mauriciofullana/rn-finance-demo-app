@@ -17,10 +17,11 @@ export const main = '#f4351e';
 export const mainDisabled = 'rgba(244, 53, 30, 0.5)';
 export const secondary = '#f4351e';
 export const header = '#030303';
-export const screenBackground = '#3c4d65';
+export const screenBackground = '#263d5e';
 
-export const baseText = darkGray;
+export const baseText = white;
 export const darkText = darkestGray;
+export const loginText = white;
 export const sectionBackground = lightWarmGray;
 export const background = white;
 export const enabled = main;
