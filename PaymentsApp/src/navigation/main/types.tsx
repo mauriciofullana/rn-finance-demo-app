@@ -7,6 +7,8 @@ export type MainStackParamList = {
     Movements: undefined
 };
 
+export type MainNavigationProp = StackNavigationProp<MainStackParamList>;
+
 export type HomeScreenNavigationProp = StackNavigationProp<
     MainStackParamList,
 	'Home'

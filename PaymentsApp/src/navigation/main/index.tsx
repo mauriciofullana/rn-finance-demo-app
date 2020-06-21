@@ -8,7 +8,8 @@ import MovementsScreen from '../../screens/movements/MovementsScreen';
 import { MainStackParamList, HomeScreenNavigationProp } from './types';
 import { screenHeaderOptions } from '../CommonHeaderOption';
 import { Colors } from '../../styles';
-import { Platform } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -24,7 +25,22 @@ const MainStackkNavigator: FunctionComponent = () => {
 			<MainStack.Screen
 				name="Home"
 				component={HomeScreen}
-				options={screenHeaderOptions(logOut)}
+				options={() => {
+					return {
+						headerTransparent: true,
+						headerTitle: () => null,
+						headerRight: () => {
+							return (
+								<TouchableOpacity
+									style={styles.headerIconContainer}
+									onPress={() => logOut()}
+								>
+									<Ionicons style={styles.hederMenuIcon} name="ios-log-out" size={28} />
+								</TouchableOpacity>
+							);
+						}
+					}
+				}}
 			/>
 			<MainStack.Screen
 				name="Movements"
@@ -43,5 +59,21 @@ const MainStackkNavigator: FunctionComponent = () => {
 		</MainStack.Navigator>
 	);
 };
+
+const styles = StyleSheet.create({
+	hederMenuIcon: {
+		color: "#d6d6d6"
+	},
+	headerIconContainer: {
+		marginHorizontal: 15
+	},
+	headerTitle: {
+		alignItems: 'center'
+	},
+	img: {
+		width: 110,
+		height: 32
+	}
+});
 
 export default MainStackkNavigator;

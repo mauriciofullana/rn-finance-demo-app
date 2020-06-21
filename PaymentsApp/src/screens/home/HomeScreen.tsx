@@ -1,11 +1,20 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	Image,
+	FlatList
+} from 'react-native';
 import {
 	MaterialCommunityIcons,
 	MaterialIcons,
 	FontAwesome,
 	AntDesign
 } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
@@ -15,77 +24,192 @@ interface HomeScreenProps {
 }
 
 const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
-	return (
-		<View style={styles.container}>
-			<View style={styles.welcome}>
-				<TouchableOpacity style={styles.welcomePicContainer}>
-					<FontAwesome
-						name="user-circle-o"
-						color={Colors.mediumGray}
-						size={80}
+	const movements = [
+		{
+			id: 1,
+			holder: 'Mauricio Fullana',
+			reference: 'Pago Colegio',
+			date: new Date(),
+			amount: 550.0,
+			isDebit: true
+		},
+		{
+			id: 2,
+			holder: 'Sebastian Fernandéz',
+			reference: 'Alquiler casa Montevideo',
+			date: new Date(),
+			amount: 680.0,
+			isDebit: true
+		},
+		{
+			id: 3,
+			holder: 'Horacio Peralta',
+			reference: 'Test credito',
+			date: new Date(),
+			amount: 15500.0,
+			isDebit: false
+		},
+		{
+			id: 4,
+			holder: 'Alvaro Recoba',
+			reference: 'Pago por clase de tiros libres',
+			date: new Date(),
+			amount: 15500.0,
+			isDebit: true
+		},
+		{
+			id: 5,
+			holder: 'Luis Suarez',
+			reference: 'Referencia',
+			date: new Date(),
+			amount: 50600.0,
+			isDebit: false
+		}
+	];
+
+	const renderMovements = (movement: any) => {
+		return (
+			<View
+				style={{
+					flex: 1,
+					height: 80,
+					flexDirection: 'row',
+					alignItems: 'center'
+				}}
+			>
+				<View style={{ marginRight: 15, marginLeft: 10 }}>
+					<Ionicons
+						name={movement.isDebit ? 'ios-arrow-forward' : 'ios-arrow-back'}
+						size={20}
+						color={movement.isDebit ? '#bd0000' : 'green'}
 					/>
-					{/* <Image
-						style={styles.img}
-						source={require('../../../assets/chino.png')}
-					/> */}
-				</TouchableOpacity>
-				<View style={styles.welcomeTextContainer}>
-					<View style={{ flexDirection: 'row', marginBottom: 5 }}>
-						<Text style={{ fontSize: 17 }}>Bienvenido, </Text>
-						<Text style={{ fontWeight: 'bold', fontSize: 17 }}>
-							Mauricio Fullana
-						</Text>
-					</View>
-					<Text style={{ fontSize: 12 }}>Último acceso: 20 May 14:48</Text>
-					<Text style={{ fontSize: 12 }}>
-						Último cambio de contraseña: 7 May 14:22
+				</View>
+				<View style={{ flex: 1, alignItems: 'flex-start' }}>
+					<Text style={{ fontWeight: 'bold' }}>{movement.holder}</Text>
+					<Text style={{ color: '#9b9aa1' }}>{movement.reference}</Text>
+				</View>
+				<View style={{ flex: 1, alignItems: 'flex-end', marginRight: 10 }}>
+					<Text
+						style={{
+							fontSize: 18,
+							color: movement.isDebit ? '#bd0000' : 'green'
+						}}
+					>
+						Bs {movement.isDebit ? '-' : ''}
+						{movement.amount}
 					</Text>
 				</View>
 			</View>
-			<TouchableOpacity style={styles.section}>
-				<View style={styles.iconContainer}>
-					<MaterialCommunityIcons
-						style={styles.icon}
-						name="qrcode"
-						color={Colors.white}
-						size={35}
-					/>
-				</View>
-				<View style={{ flex: 1 }}>
-					<Text style={styles.sectionText}>Cobrar</Text>
-				</View>
-			</TouchableOpacity>
-			<View style={styles.divider} />
-			<TouchableOpacity style={styles.section}>
-				<View style={styles.iconContainer}>
-					<MaterialIcons
-						style={styles.icon}
-						name="attach-money"
-						color={Colors.white}
-						size={35}
-					/>
-				</View>
-				<View style={{ flex: 1 }}>
-					<Text style={styles.sectionText}>Pagar</Text>
-				</View>
-			</TouchableOpacity>
-			<View style={styles.divider} />
-			<TouchableOpacity
-				onPress={() => navigation.navigate('Movements')}
-				style={styles.section}
+		);
+	};
+
+	const renderSeparator = () => {
+		return (
+			<View style={{ borderColor: Colors.mediumGray, borderWidth: 0.3 }} />
+		);
+	};
+
+	return (
+		<View style={styles.container}>
+			<LinearGradient
+				colors={['rgba(255,255,255,0.1)', 'rgba(38, 61, 94, 0.9)']}
+				style={{ flex: 1 }}
 			>
-				<View style={styles.iconContainer}>
-					<MaterialCommunityIcons
-						style={styles.icon}
-						name="format-list-bulleted"
-						color={Colors.white}
-						size={35}
-					/>
+				<View style={styles.welcome}>
+					<TouchableOpacity style={styles.welcomePicContainer}>
+						<FontAwesome
+							name="user-circle-o"
+							color={Colors.mediumGray}
+							size={60}
+						/>
+					</TouchableOpacity>
+					<View style={styles.welcomeTextContainer}>
+						<View style={{ flexDirection: 'row', marginBottom: 5 }}>
+							<Text style={{ color: '#d6d6d6' }}>Bienvenido, </Text>
+							<Text style={{ fontWeight: 'bold', color: '#d6d6d6' }}>
+								Mauricio Fullana
+							</Text>
+						</View>
+						<Text style={{ fontSize: 11, color: '#c9c9c9' }}>
+							Último acceso: 20 May 14:48
+						</Text>
+						<Text style={{ fontSize: 11, color: '#c9c9c9' }}>
+							Último cambio de contraseña: 7 May 14:22
+						</Text>
+					</View>
 				</View>
-				<View style={{ flex: 1 }}>
-					<Text style={styles.sectionText}>Movimientos</Text>
+				<View style={{ flex: 2, flexDirection: 'row', paddingBottom: 10 }}>
+					<TouchableOpacity style={styles.section}>
+						<View style={styles.iconContainer}>
+							<MaterialCommunityIcons
+								style={styles.icon}
+								name="qrcode"
+								color={Colors.white}
+								size={30}
+							/>
+						</View>
+						<View>
+							<Text style={styles.sectionText}>Cobrar</Text>
+						</View>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.section}>
+						<View style={styles.iconContainer}>
+							<MaterialIcons
+								style={styles.icon}
+								name="attach-money"
+								color={Colors.white}
+								size={30}
+							/>
+						</View>
+						<View>
+							<Text style={styles.sectionText}>Pagar</Text>
+						</View>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.section}
+						onPress={() => navigation.navigate('Movements')}
+					>
+						<View style={styles.iconContainer}>
+							<MaterialCommunityIcons
+								style={styles.icon}
+								name="format-list-bulleted"
+								color={Colors.white}
+								size={30}
+							/>
+						</View>
+						<View>
+							<Text style={styles.sectionText}>Historial</Text>
+						</View>
+					</TouchableOpacity>
 				</View>
-			</TouchableOpacity>
+			</LinearGradient>
+			<View
+				style={{
+					flex: 1,
+					backgroundColor: 'white',
+					paddingHorizontal: 20,
+					borderTopRightRadius: 15,
+					borderTopLeftRadius: 15
+				}}
+			>
+				<Text
+					style={{
+						color: '#9b9aa1',
+						fontSize: 16,
+						marginTop: 30,
+						marginVertical: 5
+					}}
+				>
+					Transacciones recientes
+				</Text>
+				<FlatList
+					data={movements}
+					keyExtractor={movement => movement.id.toString()}
+					renderItem={movement => renderMovements(movement.item)}
+					ItemSeparatorComponent={renderSeparator}
+					showsVerticalScrollIndicator={false}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -100,7 +224,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		paddingHorizontal: 15,
-		backgroundColor: 'white'
+		marginTop: 70
 	},
 	welcomePicContainer: {
 		justifyContent: 'center'
@@ -119,14 +243,13 @@ const styles = StyleSheet.create({
 	},
 	section: {
 		flex: 1,
-		paddingRight: 30,
-		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	iconContainer: {
-		flex: 1,
-		alignItems: 'flex-end'
+		marginBottom: 10
+		//flex: 1,
+		// alignItems: 'flex-end'
 	},
 	divider: {
 		marginHorizontal: 50,
@@ -134,14 +257,13 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.3
 	},
 	icon: {
-		marginRight: 25,
-		padding: 12,
+		padding: 20,
 		backgroundColor: '#29394f',
 		borderRadius: 50
 	},
 	sectionText: {
 		color: Colors.white,
-		fontSize: 18
+		fontSize: 12
 	}
 });
 
