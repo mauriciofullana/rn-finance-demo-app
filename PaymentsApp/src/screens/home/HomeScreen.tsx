@@ -192,16 +192,16 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					borderTopLeftRadius: 15
 				}}
 			>
-				<Text
-					style={{
-						color: '#9b9aa1',
-						fontSize: 16,
-						marginTop: 30,
-						marginVertical: 5
-					}}
-				>
-					Transacciones recientes
-				</Text>
+				<View style={{ flexDirection: 'row', marginTop: 30, marginVertical: 10 }}>
+					<Text style={{flex: 1, color: '#9b9aa1', fontSize: 16}}>
+						Transacciones recientes
+					</Text>
+					<TouchableOpacity>
+						<Text style={{alignSelf: 'flex-end', color: Colors.main, fontSize: 14}}>
+							Ver todas
+						</Text>
+					</TouchableOpacity>
+				</View>
 				<FlatList
 					data={movements}
 					keyExtractor={movement => movement.id.toString()}
@@ -248,8 +248,6 @@ const styles = StyleSheet.create({
 	},
 	iconContainer: {
 		marginBottom: 10
-		//flex: 1,
-		// alignItems: 'flex-end'
 	},
 	divider: {
 		marginHorizontal: 50,
