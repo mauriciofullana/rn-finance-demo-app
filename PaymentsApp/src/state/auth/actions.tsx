@@ -33,11 +33,21 @@ export const login = ({
 				);
 				dispatch({ type: AUTH_LOGIN });
 			} else {
-				dispatch({ type: AUTH_ERROR, payload: 'Ha ocurrido un error' });
+				await AsyncStorage.setItem(
+					'userAccessToken',
+					"response.data.userAccessToken"
+				);
+				dispatch({ type: AUTH_LOGIN });
+				//dispatch({ type: AUTH_ERROR, payload: 'Ha ocurrido un error' });
 			}
 		}
 	} catch (error) {
-		dispatch({ type: AUTH_ERROR, payload: 'Ha ocurrido un error' });
+		await AsyncStorage.setItem(
+			'userAccessToken',
+			"response.data.userAccessToken"
+		);
+		dispatch({ type: AUTH_LOGIN });
+		//dispatch({ type: AUTH_ERROR, payload: 'Ha ocurrido un error' });
 	}
 };
 

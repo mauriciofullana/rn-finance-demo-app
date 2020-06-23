@@ -105,7 +105,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 
 	const renderSeparator = () => {
 		return (
-			<View style={{ borderColor: Colors.mediumGray, borderWidth: 0.3 }} />
+			<View style={{ borderColor: Colors.lightGray, borderWidth: 0.35 }} />
 		);
 	};
 
@@ -130,22 +130,22 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 								Mauricio Fullana
 							</Text>
 						</View>
-						<Text style={{ fontSize: 11, color: '#c9c9c9' }}>
+						<Text style={{ fontSize: 13, color: '#c9c9c9' }}>
 							Último acceso: 20 May 14:48
 						</Text>
-						<Text style={{ fontSize: 11, color: '#c9c9c9' }}>
+						<Text style={{ fontSize: 13, color: '#c9c9c9' }}>
 							Último cambio de contraseña: 7 May 14:22
 						</Text>
 					</View>
 				</View>
-				<View style={{ flex: 2, flexDirection: 'row', paddingBottom: 10 }}>
+				<View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
 					<TouchableOpacity style={styles.section}>
 						<View style={styles.iconContainer}>
 							<MaterialCommunityIcons
 								style={styles.icon}
 								name="qrcode"
 								color={Colors.white}
-								size={30}
+								size={34}
 							/>
 						</View>
 						<View>
@@ -154,12 +154,14 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.section}>
 						<View style={styles.iconContainer}>
-							<MaterialIcons
-								style={styles.icon}
-								name="attach-money"
-								color={Colors.white}
-								size={30}
-							/>
+							<View style={{backgroundColor: '#29394f', borderRadius: 50}}>
+								<MaterialIcons
+									style={styles.icon}
+									name="attach-money"
+									color={Colors.white}
+									size={34}
+								/>
+							</View>
 						</View>
 						<View>
 							<Text style={styles.sectionText}>Pagar</Text>
@@ -174,7 +176,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 								style={styles.icon}
 								name="format-list-bulleted"
 								color={Colors.white}
-								size={30}
+								size={34}
 							/>
 						</View>
 						<View>
@@ -221,10 +223,13 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.screenBackground
 	},
 	welcome: {
-		flex: 1,
+		flex: 1.5,
 		flexDirection: 'row',
 		paddingHorizontal: 15,
-		marginTop: 70
+		alignItems: 'center',
+		justifyContent: 'center',
+		//marginTop: 90,
+		paddingTop: 40
 	},
 	welcomePicContainer: {
 		justifyContent: 'center'
@@ -237,17 +242,17 @@ const styles = StyleSheet.create({
 		borderWidth: 1
 	},
 	welcomeTextContainer: {
-		flex: 1,
 		marginLeft: 10,
 		justifyContent: 'center'
 	},
 	section: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	iconContainer: {
-		marginBottom: 10
+		marginBottom: 10,
+		backgroundColor: '#29394f',
+		borderRadius: 50
 	},
 	divider: {
 		marginHorizontal: 50,
@@ -256,8 +261,7 @@ const styles = StyleSheet.create({
 	},
 	icon: {
 		padding: 20,
-		backgroundColor: '#29394f',
-		borderRadius: 50
+		backgroundColor: 'transparent'
 	},
 	sectionText: {
 		color: Colors.white,
