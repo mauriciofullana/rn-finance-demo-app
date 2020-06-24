@@ -105,7 +105,7 @@ const MovementsScreen: FunctionComponent = () => {
 
 	const renderSeparator = () => {
 		return (
-			<View style={{ borderColor: Colors.mediumGray, borderWidth: 0.3 }} />
+			<View style={{ borderColor: Colors.lightGray, borderWidth: 0.35 }} />
 		);
 	};
 

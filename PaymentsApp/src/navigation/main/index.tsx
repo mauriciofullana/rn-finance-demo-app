@@ -5,6 +5,9 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../state/auth/actions';
 import HomeScreen from '../../screens/home/HomeScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
+
+import ChargeNavigator from '../charge/index';
+
 import { MainStackParamList, HomeScreenNavigationProp } from './types';
 import { screenHeaderOptions } from '../CommonHeaderOption';
 import { Colors } from '../../styles';
@@ -54,6 +57,29 @@ const MainStackkNavigator: FunctionComponent = () => {
 					headerTitleStyle: {
 						fontSize: 18
 					}
+				}}
+			/>
+			<MainStack.Screen
+				name="Charge"
+				component={ChargeNavigator}
+				options={{
+					title:"Cobros Activos",
+					headerTintColor: 'white',
+					headerStyle: {
+						backgroundColor: Colors.screenBackground,
+					},
+					headerTitleStyle: {
+						fontSize: 18
+					},
+					headerRight: () => {
+                        return (
+                            <TouchableOpacity
+                                style={styles.headerIconContainer}
+                            >
+                                <Ionicons style={styles.hederMenuIcon} name="md-add" size={28} />
+                            </TouchableOpacity>
+                        );
+                    }
 				}}
 			/>
 		</MainStack.Navigator>

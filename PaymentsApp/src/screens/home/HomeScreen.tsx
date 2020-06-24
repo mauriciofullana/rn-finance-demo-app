@@ -139,7 +139,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					</View>
 				</View>
 				<View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-					<TouchableOpacity style={styles.section}>
+					<TouchableOpacity style={styles.section} onPress={() => navigation.navigate("Charge")}>
 						<View style={styles.iconContainer}>
 							<MaterialCommunityIcons
 								style={styles.icon}
@@ -198,7 +198,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					<Text style={{flex: 1, color: '#9b9aa1', fontSize: 16}}>
 						Transacciones recientes
 					</Text>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={() => navigation.navigate('Movements')}>
 						<Text style={{alignSelf: 'flex-end', color: Colors.main, fontSize: 14}}>
 							Ver todas
 						</Text>
