@@ -21,6 +21,7 @@ import Spinner from '../../components/Spinner';
 import CommonError from '../../components/CommonError';
 import { loginText } from '../../styles/typography';
 import { base } from '../../styles/buttons';
+import { background } from '../../styles/colors';
 
 interface LoginProps {
 	navigation: LoginScreenNavigationProp;
@@ -37,8 +38,8 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	}
 
 	return (
-		<ScrollView style={styles.scrollContainer}>
-			<View style={styles.container}>
+		<ScrollView style={styles.scrollContainer}
+		contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', flexDirection: 'column' }}>
 				<Spinner text="Cargand..." visible={loading} />
 				<CommonError
 					selector={authSelector}
@@ -65,6 +66,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 							value={username}
 							onChangeText={setUsername}
 							placeholder="Usuario"
+							placeholderTextColor={Colors.lightGray}
 							autoCapitalize="none"
 						/>
 					</View>
@@ -80,6 +82,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 							value={password}
 							onChangeText={setPassword}
 							placeholder="Contraseña"
+							placeholderTextColor={Colors.lightGray}
 							autoCapitalize="none"
 							secureTextEntry={true}
 						/>
@@ -98,7 +101,6 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 						<Text style={styles.signinButtonText}>¿Olvidó su contraseña?</Text>
 					</TouchableOpacity>
 				</KeyboardAvoidingView>
-			</View>
 		</ScrollView>
 	);
 };
@@ -106,15 +108,19 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
 	scrollContainer: {
 		flex: 1,
-		backgroundColor: Colors.screenBackground
+		backgroundColor: Colors.screenBackground,
+		paddingTop: 90,
+		paddingHorizontal: 25
 	},
 	container: {
+		flex: 1,
 		marginTop: 90,
 		paddingHorizontal: 25
 	},
 	logoContainer: {
-		alignItems: 'center',
-		marginBottom: 150
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	img: {
 		width: '80%',
@@ -122,10 +128,9 @@ const styles = StyleSheet.create({
 		aspectRatio: 598 / 176
 	},
 	formContainer: {
-		flex: 2
+		flex: 1
 	},
 	inputCotainer: {
-		flex: 1,
 		flexDirection: 'row',
 		alignItems: 'center',
 		borderBottomColor: Colors.baseText,

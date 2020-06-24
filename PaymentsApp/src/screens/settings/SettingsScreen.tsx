@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5
 	},
 	themeSwitch: {
-		flex: 1,
+		//flex: 1,
 		marginRight: 15,
 		transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
     },
