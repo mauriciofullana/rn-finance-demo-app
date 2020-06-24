@@ -28,7 +28,7 @@ const AuthStackNavigator: FunctionComponent = () => {
                 options={({ navigation }) => ({
                     headerTitle: () => null,
                     headerTransparent: true,
-                    headerRight: () => {
+                    headerLeft: () => {
                         return (
                             <TouchableOpacity
                                 style={styles.headerIconContainer}

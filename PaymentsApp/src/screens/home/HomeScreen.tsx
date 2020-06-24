@@ -112,7 +112,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 	return (
 		<View style={styles.container}>
 			<LinearGradient
-				colors={['rgba(255,255,255,0.1)', 'rgba(38, 61, 94, 0.9)']}
+				colors={['rgba(38, 61, 94, 0.9)', 'rgba(255,255,255,0.1)']}
 				style={{ flex: 1 }}
 			>
 				<View style={styles.welcome}>
@@ -139,7 +139,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					</View>
 				</View>
 				<View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-					<TouchableOpacity style={styles.section} onPress={() => navigation.navigate("Charge")}>
+					<TouchableOpacity style={styles.section} onPress={() => navigation.navigate("ChargeList")}>
 						<View style={styles.iconContainer}>
 							<MaterialCommunityIcons
 								style={styles.icon}
@@ -154,14 +154,12 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.section}>
 						<View style={styles.iconContainer}>
-							<View style={{backgroundColor: '#29394f', borderRadius: 50}}>
-								<MaterialIcons
-									style={styles.icon}
-									name="attach-money"
-									color={Colors.white}
-									size={34}
-								/>
-							</View>
+							<MaterialIcons
+								style={styles.icon}
+								name="attach-money"
+								color={Colors.white}
+								size={34}
+							/>
 						</View>
 						<View>
 							<Text style={styles.sectionText}>Pagar</Text>

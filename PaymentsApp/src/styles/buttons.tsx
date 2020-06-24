@@ -50,3 +50,8 @@ export const smallRounded = {
 	...small,
 	...rounded
 };
+
+export const actionButton = {
+	...base,
+	height: 55,
+}

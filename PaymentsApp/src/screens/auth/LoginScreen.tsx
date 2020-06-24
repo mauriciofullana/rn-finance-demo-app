@@ -151,7 +151,6 @@ const styles = StyleSheet.create({
 		...Buttons.base,
 		marginTop: 25,
 		marginBottom: 20,
-
 		//width: '100%'
 	},
 	signupButtonDisabled : {

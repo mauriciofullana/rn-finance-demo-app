@@ -3,8 +3,13 @@ import { View, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native
 import { Colors } from '../../styles';
 import { Ionicons } from '@expo/vector-icons';
 import SearchBar from '../../components/SearchBar';
+import { ChargeListScreenNavigationProp } from '../../navigation/main/types';
 
-const QrListScreen: FunctionComponent = () => {
+interface ChargeListProps {
+	navigation: ChargeListScreenNavigationProp;
+}
+
+const ChargeListScreen: FunctionComponent<ChargeListProps> = ({navigation}) => {
 	const [term, setTerm] = useState('');
     
     const qrList = [
@@ -39,25 +44,22 @@ const QrListScreen: FunctionComponent = () => {
     
     const renderQrList = (qr: any) => {
 		return (
-			<View style={{ flex: 1, height: 80, flexDirection: 'row', alignItems: 'center' }}>
+			<TouchableOpacity 
+				style={styles.qrListContainer}
+				onPress={()=>navigation.navigate("Charge")}
+			>
 				<View style={{flex: 1, alignItems: 'flex-start'}}>
 				    <Text style={{fontWeight: 'bold', fontSize: 16, marginBottom: 2}}>{qr.description}</Text>
                     <Text style={{fontSize: 15}}>USD {qr.amount}</Text>
                     <Text style={{fontSize: 15}}>{qr.exopirationDate.toLocaleDateString("en-US")}</Text>
                 </View>
-				<TouchableOpacity style={{marginRight: 15, marginLeft: 10}}>
+				<View style={{marginRight: 15, marginLeft: 10}}>
 					<Ionicons
-						name="md-create"
+						name="ios-arrow-forward"
 						size={25}
 					/>
-				</TouchableOpacity>
-				<TouchableOpacity style={{marginRight: 15, marginLeft: 10}}>
-					<Ionicons
-						name="md-trash"
-						size={25}
-					/>
-				</TouchableOpacity>
-			</View>
+				</View>
+			</TouchableOpacity>
 		);
 	};
 
@@ -79,7 +81,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: Colors.white,
 		paddingHorizontal: 15
+	},
+	qrListContainer: {
+		flex: 1, 
+		height: 80, 
+		flexDirection: 'row', 
+		alignItems: 'center'
 	}
 });
 
-export default QrListScreen;
+export default ChargeListScreen;

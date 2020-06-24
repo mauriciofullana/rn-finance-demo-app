@@ -6,11 +6,10 @@ import { logout } from '../../state/auth/actions';
 import HomeScreen from '../../screens/home/HomeScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
 
-import ChargeNavigator from '../charge/index';
-import QrListScreen from '../../screens/charge/QrListScreen';
+import ChargeListScreen from '../../screens/charge/ChargeListScreen';
+import ChargeScreen from '../../screens/charge/ChargeScreen';
 
-import { MainStackParamList, HomeScreenNavigationProp } from './types';
-import { screenHeaderOptions } from '../CommonHeaderOption';
+import { MainStackParamList } from './types';
 import { Colors } from '../../styles';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -31,6 +30,7 @@ const MainStackkNavigator: FunctionComponent = () => {
 				component={HomeScreen}
 				options={() => {
 					return {
+						title: "Inicio",
 						headerTransparent: true,
 						headerTitle: () => null,
 						headerRight: () => {
@@ -40,6 +40,16 @@ const MainStackkNavigator: FunctionComponent = () => {
 									onPress={() => logOut()}
 								>
 									<Ionicons style={styles.hederMenuIcon} name="ios-log-out" size={28} />
+								</TouchableOpacity>
+							);
+						},
+						headerLeft: () => {
+							return (
+								<TouchableOpacity
+									style={styles.headerIconContainer}
+									onPress={()=>{}}
+								>
+									<Ionicons style={styles.hederMenuIcon} name="ios-settings" size={28} />
 								</TouchableOpacity>
 							);
 						}
@@ -61,10 +71,10 @@ const MainStackkNavigator: FunctionComponent = () => {
 				}}
 			/>
 			<MainStack.Screen
-				name="Charge"
-				component={QrListScreen}
+				name="ChargeList"
+				component={ChargeListScreen}
 				options={{
-					title:"Cobros Activos",
+					title:"Cobros activos",
 					headerTintColor: 'white',
 					headerStyle: {
 						backgroundColor: Colors.screenBackground,
@@ -80,7 +90,21 @@ const MainStackkNavigator: FunctionComponent = () => {
                                 <Ionicons style={styles.hederMenuIcon} name="md-add" size={28} />
                             </TouchableOpacity>
                         );
-                    }
+					}
+				}}
+			/>
+			<MainStack.Screen
+				name="Charge"
+				component={ChargeScreen}
+				options={{
+					title:"",
+					headerTintColor: 'white',
+					headerStyle: {
+						backgroundColor: Colors.screenBackground,
+					},
+					headerTitleStyle: {
+						fontSize: 18
+					}
 				}}
 			/>
 		</MainStack.Navigator>
