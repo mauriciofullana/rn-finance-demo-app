@@ -7,6 +7,7 @@ import HomeScreen from '../../screens/home/HomeScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
 
 import ChargeNavigator from '../charge/index';
+import QrListScreen from '../../screens/charge/QrListScreen';
 
 import { MainStackParamList, HomeScreenNavigationProp } from './types';
 import { screenHeaderOptions } from '../CommonHeaderOption';
@@ -61,7 +62,7 @@ const MainStackkNavigator: FunctionComponent = () => {
 			/>
 			<MainStack.Screen
 				name="Charge"
-				component={ChargeNavigator}
+				component={QrListScreen}
 				options={{
 					title:"Cobros Activos",
 					headerTintColor: 'white',
