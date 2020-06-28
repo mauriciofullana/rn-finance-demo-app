@@ -7,10 +7,11 @@ import {
 	TextInput,
 	TouchableOpacity,
 	Image,
-	KeyboardAvoidingView
+	KeyboardAvoidingView,
+	Switch
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 import { login } from '../../state/auth/actions';
 import { authSelector } from '../../state/selectors';
@@ -20,8 +21,6 @@ import { LoginScreenNavigationProp } from '../../navigation/auth/types';
 import Spinner from '../../components/Spinner';
 import CommonError from '../../components/CommonError';
 import { loginText } from '../../styles/typography';
-import { base } from '../../styles/buttons';
-import { background } from '../../styles/colors';
 
 interface LoginProps {
 	navigation: LoginScreenNavigationProp;
@@ -30,6 +29,9 @@ interface LoginProps {
 const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
+	const [isEnabled, setIsEnabled] = useState(false);
+	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 	const dispatch = useDispatch();
 	const { loading } = useSelector(authSelector);
 
@@ -84,8 +86,31 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 							placeholder="Contraseña"
 							placeholderTextColor={Colors.lightGray}
 							autoCapitalize="none"
-							secureTextEntry={true}
+							secureTextEntry={secureTextEntry}
 						/>
+						<View style={styles.eyeIconContainer}>
+							<TouchableOpacity onPress={()=>setSecureTextEntry(state => !state)}>
+								<Ionicons
+									style={styles.inputIcon}
+									name={secureTextEntry ? 'md-eye' : 'md-eye-off'}
+									color={Colors.white}
+									size={20}
+								/>
+							</TouchableOpacity>
+						</View>
+					</View>
+					<View style={styles.switchContainer}>
+						<Switch
+							style={styles.switch}
+							trackColor={{ false: Colors.lightGray, true: Colors.main }}
+							thumbColor={Colors.white}
+							ios_backgroundColor="#3e3e3e"
+							onValueChange={toggleSwitch}
+							value={isEnabled}
+						/>
+						<Text style={styles.switchText}>
+							Recordar Usuario
+						</Text>
 					</View>
 					<TouchableOpacity
 						disabled={disabledLogin()}
@@ -140,6 +165,10 @@ const styles = StyleSheet.create({
 	inputIcon: {
 		padding: 5
 	},
+	eyeIconContainer: {
+		flex: 1,
+		alignItems: 'flex-end'
+	},
 	inputBox: {
 		...loginText,
 		paddingTop: 10,
@@ -147,9 +176,21 @@ const styles = StyleSheet.create({
 		paddingBottom: 10,
 		paddingLeft: 10
 	},
+	switchContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginTop: 10,
+		marginBottom: 20,
+	},
+	switch: {
+		marginRight: 10
+	},
+	switchText: {
+		color: Colors.lightGray
+	},
 	signupButton: {
 		...Buttons.base,
-		marginTop: 25,
+		//marginTop: 20,
 		marginBottom: 20,
 		//width: '100%'
 	},
