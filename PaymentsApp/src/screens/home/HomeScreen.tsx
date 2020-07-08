@@ -4,20 +4,18 @@ import {
 	Text,
 	StyleSheet,
 	TouchableOpacity,
-	Image,
 	FlatList
 } from 'react-native';
 import {
 	MaterialCommunityIcons,
 	MaterialIcons,
-	FontAwesome,
-	AntDesign
 } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
+import  DataUserComponent  from '../../components/DataUserComponent';
 
 interface HomeScreenProps {
 	navigation: HomeScreenNavigationProp;
@@ -115,29 +113,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 				colors={['rgba(38, 61, 94, 0.9)', 'rgba(255,255,255,0.1)']}
 				style={{ flex: 1 }}
 			>
-				<View style={styles.welcome}>
-					<TouchableOpacity style={styles.welcomePicContainer}>
-						<FontAwesome
-							name="user-circle-o"
-							color={Colors.mediumGray}
-							size={60}
-						/>
-					</TouchableOpacity>
-					<View style={styles.welcomeTextContainer}>
-						<View style={{ flexDirection: 'row', marginBottom: 5 }}>
-							<Text style={{ color: '#d6d6d6' }}>Bienvenido, </Text>
-							<Text style={{ fontWeight: 'bold', color: '#d6d6d6' }}>
-								Mauricio Fullana
-							</Text>
-						</View>
-						<Text style={{ fontSize: 13, color: '#c9c9c9' }}>
-							Último acceso: 20 May 14:48
-						</Text>
-						<Text style={{ fontSize: 13, color: '#c9c9c9' }}>
-							Último cambio de contraseña: 7 May 14:22
-						</Text>
-					</View>
-				</View>
+				<DataUserComponent/>
 				<View style={{ flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
 					<TouchableOpacity style={styles.section} onPress={() => navigation.navigate("ChargeList")}>
 						<View style={styles.iconContainer}>
@@ -219,29 +195,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		backgroundColor: Colors.screenBackground
-	},
-	welcome: {
-		flex: 1.5,
-		flexDirection: 'row',
-		paddingHorizontal: 15,
-		alignItems: 'center',
-		justifyContent: 'center',
-		//marginTop: 90,
-		paddingTop: 40
-	},
-	welcomePicContainer: {
-		justifyContent: 'center'
-	},
-	img: {
-		width: 95,
-		height: 95,
-		borderRadius: 50,
-		borderColor: Colors.mediumGray,
-		borderWidth: 1
-	},
-	welcomeTextContainer: {
-		marginLeft: 10,
-		justifyContent: 'center'
 	},
 	section: {
 		flex: 1,
