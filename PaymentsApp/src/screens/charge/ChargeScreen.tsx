@@ -16,7 +16,7 @@ const ChargeScreen: FunctionComponent = () => {
 				<TouchableOpacity style={[styles.commonButton, styles.editButton]}>
 					<Text style={[styles.buttonText, styles.editButtonText]}>EDITAR</Text>
 					<View style={styles.iconContainer}>
-						<Ionicons style={styles.buttonIcon} name="md-create" size={28} color={Colors.green} />
+						<Ionicons style={styles.buttonIcon} name="md-create" size={28} color={Colors.screenBackground} />
 					</View>
 				</TouchableOpacity>
 				<TouchableOpacity style={[styles.commonButton, styles.shareButton]}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	img: {
-		height: '70%',
+		height: '65%',
 		width: undefined,
 		aspectRatio: 712 / 711,
 		marginBottom: 15
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
 	},
 	editButton: {
 		backgroundColor: 'transparent',
-		borderColor: Colors.green,
+		borderColor: Colors.screenBackground,
 		borderWidth: 1
 	},
 	editButtonText: {
-		color: Colors.green
+		color: Colors.screenBackground
 	},
 	shareButton: {
-		backgroundColor: Colors.green
+		backgroundColor: Colors.screenBackground
 	},
 	shareButtonText: {
 		color: Colors.white

@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import { Colors } from '../../styles';
 import { Ionicons } from '@expo/vector-icons';
@@ -84,28 +84,24 @@ const MovementsScreen: FunctionComponent = () => {
 
 	const renderMovements = (movement: any) => {
 		return (
-			<View style={{ flex: 1, height: 80, flexDirection: 'row', alignItems: 'center' }}>
-				<View style={{marginRight: 15, marginLeft: 10}}>
-					<Ionicons
-						name={movement.isDebit ? 'ios-arrow-forward' : 'ios-arrow-back'}
-						size={20}
-						color={movement.isDebit ? '#bd0000' : 'green'}
-					/>
+			<View style={styles.listItemContainer}>
+				<View style={styles.listItemInfoTextContainer}>
+					<Text style={styles.listItemHolderText}>{movement.holder}</Text>
+					<Text style={styles.listItemReferenceText}>{movement.reference}</Text>
 				</View>
-				<View style={{flex: 1, alignItems: 'flex-start'}}>
-				    <Text style={{fontWeight: 'bold'}}>{movement.holder}</Text>
-                    <Text>{movement.reference}</Text>
-                </View>
-                <View style={{flex: 1, alignItems: 'flex-end', marginRight: 10}}>
-                    <Text style={{fontSize: 20 ,color: movement.isDebit ? '#bd0000' : 'gray'}}>Bs {movement.isDebit ? '-' : ''}{movement.amount}</Text>
-                </View>
+				<View style={styles.listItemAmountContainer}>
+					<Text style={styles.listItemAmount}>
+						USD {movement.isDebit ? '-' : ''}
+						{movement.amount}
+					</Text>
+				</View>
 			</View>
 		);
 	};
 
 	const renderSeparator = () => {
 		return (
-			<View style={{ borderColor: Colors.lightGray, borderWidth: 0.35 }} />
+			<View style={styles.listItemSeparetor} />
 		);
 	};
 
@@ -120,6 +116,18 @@ const MovementsScreen: FunctionComponent = () => {
 	return (
 		<View style={styles.container}>
 			<SearchBar term={term} onTermChange={setTerm} />
+			<View style={styles.headerButtons}>
+				<TouchableOpacity style={{borderColor: Colors.main, borderWidth: 1, borderRadius: 5, padding: 3, marginRight: 10}}>
+					<Text style={{color: Colors.main}}>
+						COBROS
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={{borderColor: Colors.mediumGray, borderWidth: 1, borderRadius: 5, padding: 3, marginRight: 10}}>
+				<Text style={{color: Colors.mediumGray}}>
+						PAGOS
+					</Text>
+				</TouchableOpacity>
+			</View>
 			<FlatList
 				data={results}
 				onRefresh={onRefresh}
@@ -127,6 +135,7 @@ const MovementsScreen: FunctionComponent = () => {
 				keyExtractor={movement => movement.id.toString()}
 				renderItem={movement => renderMovements(movement.item)}
 				ItemSeparatorComponent={renderSeparator}
+				showsVerticalScrollIndicator={false}
 			/>
 		</View>
 	);
@@ -135,9 +144,61 @@ const MovementsScreen: FunctionComponent = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: Colors.white,
+		backgroundColor: Colors.screenBackground,
 		paddingHorizontal: 15
-	}
+	},
+    headerText: {
+        flexDirection: 'row',
+        marginBottom: 12
+    },
+    headerButtons: {
+        flexDirection: 'row',
+    },
+    headerMainText: {
+        flex: 1,
+        fontSize: 14,
+        color: Colors.lightGray
+    },
+    headerSeeAllText: {
+        alignSelf: 'flex-end', 
+        color: Colors.main, 
+        fontSize: 14
+    },
+	listItemSeparetor: {
+        borderColor: Colors.lightGray,
+        borderWidth: 0.35
+    },
+    listItemContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 80
+    },
+    listIconContainer: {
+        marginRight: 15, 
+        marginLeft: 10
+    },
+    listItemInfoTextContainer: {
+        flex: 1, 
+        alignItems: 'flex-start'
+    },
+    listItemHolderText: {
+        color: Colors.lightGray,
+        fontWeight: 'bold'
+    },
+    listItemReferenceText: {
+        color: Colors.lightGray,
+        fontSize: 12
+    },
+    listItemAmountContainer: {
+        flex: 1, 
+        alignItems: 'flex-end', 
+        marginRight: 10
+    },
+    listItemAmount: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: Colors.lightGray
+    }
 });
 
 export default MovementsScreen;

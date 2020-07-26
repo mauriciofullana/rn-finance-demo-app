@@ -1,25 +1,22 @@
 import React, { FunctionComponent } from 'react';
 import { Alert } from 'react-native';
-import { useSelector } from 'react-redux';
+import { CLEAR_ERROR } from '../state/common/types';
 
-interface ICommonErrorProps {
-    selector: any
-    dispatchCallback: Function
+interface ICommonErrorPros {
+    errorMessage: string,
+    callBackFunction: Function
 }
 
-const CommonError: FunctionComponent<ICommonErrorProps> = ({selector, dispatchCallback}) => {
-
-    const { error, errorMessage } = useSelector(selector);
+const CommonError: FunctionComponent<ICommonErrorPros> = ({errorMessage, callBackFunction}) => {
 
     return <>
         {
-            !!error && 
             Alert.alert(
                 'Error', 
                 errorMessage, 
                 [{
                     text: 'OK',
-                    onPress: dispatchCallback()
+                    onPress: () => callBackFunction()
                 }]
             )
         }

@@ -38,7 +38,7 @@ const ChargeListScreen: FunctionComponent<ChargeListProps> = ({navigation}) => {
     
 	const renderSeparator = () => {
 		return (
-			<View style={{ borderColor: Colors.lightGray, borderWidth: 0.35 }} />
+			<View style={styles.listItemSeparetor} />
 		);
     };
     
@@ -48,15 +48,16 @@ const ChargeListScreen: FunctionComponent<ChargeListProps> = ({navigation}) => {
 				style={styles.qrListContainer}
 				onPress={()=>navigation.navigate("Charge")}
 			>
-				<View style={{flex: 1, alignItems: 'flex-start'}}>
-				    <Text style={{fontWeight: 'bold', fontSize: 16, marginBottom: 2}}>{qr.description}</Text>
-                    <Text style={{fontSize: 15}}>USD {qr.amount}</Text>
-                    <Text style={{fontSize: 15}}>{qr.exopirationDate.toLocaleDateString("en-US")}</Text>
+				<View style={styles.itemInfoContainer}>
+				    <Text style={styles.itemDescription}>{qr.description}</Text>
+                    <Text style={styles.itemCurrencyDate}>USD {qr.amount}</Text>
+                    <Text style={styles.itemCurrencyDate}>{qr.exopirationDate.toLocaleDateString("en-US")}</Text>
                 </View>
-				<View style={{marginRight: 15, marginLeft: 10}}>
+				<View style={styles.itemIconContainer}>
 					<Ionicons
 						name="ios-arrow-forward"
-						size={25}
+						size={20}
+						color={Colors.lightGray}
 					/>
 				</View>
 			</TouchableOpacity>
@@ -79,7 +80,7 @@ const ChargeListScreen: FunctionComponent<ChargeListProps> = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
 		flex: 1,
-		backgroundColor: Colors.white,
+		backgroundColor: Colors.screenBackground,
 		paddingHorizontal: 15
 	},
 	qrListContainer: {
@@ -87,7 +88,27 @@ const styles = StyleSheet.create({
 		height: 80, 
 		flexDirection: 'row', 
 		alignItems: 'center'
-	}
+	},
+	itemInfoContainer: {
+		flex: 1, 
+		alignItems: 'flex-start'
+	},
+	itemDescription: {
+		color: Colors.lightGray,
+        fontWeight: 'bold'
+	},
+	itemCurrencyDate: {
+		color: Colors.lightGray,
+        fontSize: 12
+	},
+	itemIconContainer: {
+		marginRight: 15, 
+		marginLeft: 10
+	},
+	listItemSeparetor: {
+        borderColor: Colors.lightGray,
+        borderWidth: 0.35
+    },
 });
 
 export default ChargeListScreen;

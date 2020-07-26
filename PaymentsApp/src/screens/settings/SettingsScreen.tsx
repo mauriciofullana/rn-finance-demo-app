@@ -13,19 +13,7 @@ const SettingsScreen: FunctionComponent = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.optionContainer}>
-                <Foundation name="paint-bucket" size={22} />
-				<Text style={styles.optionText}>Dark Theme</Text>
-				<Switch
-					style={styles.themeSwitch}
-					trackColor={{ false: Colors.lightGray, true: Colors.main }}
-					thumbColor={Colors.white}
-					ios_backgroundColor="#3e3e3e"
-					onValueChange={toggleSwitch}
-					value={isEnabled}
-				/>
-			</View>
-			<View style={styles.optionContainer}>
-                <MaterialIcons name="language" size={22} />
+                <MaterialIcons name="language" size={22} color={Colors.lightGray} />
 				<Text style={styles.optionText}>Idioma</Text>
                 <View style={styles.segmentedControlContainer}>
                     <SegmentedControlTab
@@ -45,14 +33,14 @@ const SettingsScreen: FunctionComponent = () => {
                 </View>
 			</View>
             <View style={styles.optionContainer}>
-                <MaterialIcons name="star-border" size={23} />
+                <MaterialIcons name="star-border" size={23} color={Colors.lightGray} />
 				<Text style={styles.optionText}>Califique la app</Text>
                 <View style={styles.rightIconContainer}>
-                    <Feather name="chevron-right" size={22} color={Colors.mediumGray} />
+                    <Feather name="chevron-right" size={22} color={Colors.lightGray} />
                 </View>
 			</View>
             <View style={styles.optionContainer}>
-                <Feather name="info" size={22} />
+                <Feather name="info" size={22} color={Colors.lightGray} />
 				<Text style={styles.optionText}>Version 1.0.0</Text>
 			</View>
 		</View>
@@ -61,12 +49,14 @@ const SettingsScreen: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1
+		flex: 1,
+		backgroundColor: Colors.screenBackground,
 	},
     optionText: {
         flex: 1,
         fontSize: 16,
-        marginLeft: 10
+		marginLeft: 10,
+		color: Colors.lightGray
     },
 	optionContainer: {
 		flexDirection: 'row',
@@ -77,7 +67,6 @@ const styles = StyleSheet.create({
 		borderBottomWidth: 0.5
 	},
 	themeSwitch: {
-		//flex: 1,
 		marginRight: 15,
 		transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }]
     },

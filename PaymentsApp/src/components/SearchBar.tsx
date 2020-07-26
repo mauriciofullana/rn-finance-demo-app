@@ -21,7 +21,7 @@ const SearchBar: FunctionComponent<SearchBarProps> = ({ term, onTermChange }) =>
         <TextInput
             style={styles.input}
             placeholder="Buscar"
-            placeholderTextColor="#7F7F7F"
+            placeholderTextColor={Colors.mediumGray}
             autoCapitalize="none"
             autoCorrect={false}
             value={term}
@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         flexDirection: 'row',
         height: 40,
-        borderColor: Colors.screenBackground,
+        borderColor: Colors.mediumGray,
         borderWidth: 0.5,
         borderRadius: 5
     },
     searchIcon: {
-        color: '#7F7F7F',
+        color: Colors.mediumGray,
         marginHorizontal: 15,
         fontSize: 24,
         alignSelf: "center"
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        fontSize: 16
+        fontSize: 16,
+        color: Colors.lightGray
     }
 });
 

@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet, Platform } from 'react-native';
 
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ForgotScreen from '../../screens/auth/ForgotScreen';
@@ -43,10 +43,32 @@ const AuthStackNavigator: FunctionComponent = () => {
             <AuthStack.Screen
                 name="Forgot"
                 component={ForgotScreen}
+                options={{
+                    headerTitle: "Olvido de contraseña",
+                    headerBackTitleVisible: false,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        elevation: Platform.OS === "ios" ? 0 : 4,
+                        shadowOpacity: Platform.OS === "ios" ? 0 : 4,
+                        borderBottomWidth: 0,
+                        backgroundColor: Colors.screenBackground
+                    }
+                }}
             />
             <AuthStack.Screen
                 name="Settings"
                 component={SettingsScreen}
+                options={{
+                    headerTitle: "Ajustes",
+                    headerBackTitleVisible: false,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        elevation: Platform.OS === "ios" ? 0 : 4,
+                        shadowOpacity: Platform.OS === "ios" ? 0 : 4,
+                        borderBottomWidth: 0,
+                        backgroundColor: Colors.screenBackground
+                    }
+                }}
             />
         </AuthStack.Navigator>
 	);
@@ -54,7 +76,7 @@ const AuthStackNavigator: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
 	hederMenuIcon: {
-		color: Colors.white
+		color: Colors.lightGray
 	},
 	headerIconContainer: {
 		marginHorizontal: 15

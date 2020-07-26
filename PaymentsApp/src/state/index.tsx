@@ -2,9 +2,11 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 import authReducer from './auth/reducers';
+import errorReducer from './common/reducers';
 
 const reducers = combineReducers({
-	auth: authReducer
+	auth: authReducer,
+	common: errorReducer
 });
 
 // Export reducers return type to use in selectors

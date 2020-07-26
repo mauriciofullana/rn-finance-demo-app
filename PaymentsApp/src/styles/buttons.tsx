@@ -6,8 +6,8 @@ export const base = {
 	backgroundColor: Colors.enabled,
 	alignItems: 'center',
 	justifyContent: 'center',
-	borderRadius: 10,
-	height: 50,
+	borderRadius: 15,
+	height: 44,
 };
 
 export const text = {
