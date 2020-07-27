@@ -5,6 +5,7 @@ import { TouchableOpacity, StyleSheet, Platform } from 'react-native';
 
 import LoginScreen from '../../screens/auth/LoginScreen';
 import ForgotScreen from '../../screens/auth/ForgotScreen';
+import SignupScreen from '../../screens/auth/SignupScreen';
 import { AuthStackParamList } from './types';
 import { Colors } from '../../styles';
 import SettingsScreen from '../../screens/settings/SettingsScreen';
@@ -45,6 +46,21 @@ const AuthStackNavigator: FunctionComponent = () => {
                 component={ForgotScreen}
                 options={{
                     headerTitle: "Olvido de contraseña",
+                    headerBackTitleVisible: false,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                        elevation: Platform.OS === "ios" ? 0 : 4,
+                        shadowOpacity: Platform.OS === "ios" ? 0 : 4,
+                        borderBottomWidth: 0,
+                        backgroundColor: Colors.screenBackground
+                    }
+                }}
+            />
+            <AuthStack.Screen
+                name="Signup"
+                component={SignupScreen}
+                options={{
+                    headerTitle: "Registro",
                     headerBackTitleVisible: false,
                     headerTitleAlign: 'center',
                     headerStyle: {

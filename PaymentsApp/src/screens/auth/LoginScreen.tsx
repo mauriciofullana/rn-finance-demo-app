@@ -23,13 +23,14 @@ import { loginText } from '../../styles/typography';
 import { transparent } from '../../styles/colors';
 import { commonSelector } from '../../state/selectors';
 import { CLEAR_ERROR } from '../../state/common/types';
+import { pageHorizontalPadding } from '../../styles/spacing';
 
 interface LoginProps {
 	navigation: LoginScreenNavigationProp;
 }
 
 const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
-	const [username, setUsername] = useState('');
+	const [userName, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
 	const [isEnabled, setIsEnabled] = useState(false);
@@ -38,14 +39,14 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	const { error, errorMessage, loading } = useSelector(commonSelector);
 
 	const disabledLogin = () => {
-		return !username || !password;
+		return !userName || !password;
 	}
 
 	console.log('LOGIN SCREEEEEMN  --  ' + error);
 
 	return (
 		<ScrollView style={styles.scrollContainer}
-		contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between', flexDirection: 'column' }}>
+		contentContainerStyle={{ flexGrow: 1 }}>
 				{ loading && <Spinner text="Cargand..." visible={loading} />}
 				{ error &&
 					<CommonError 
@@ -59,7 +60,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 						source={require('../../../assets/logo.png')}
 					/>
 				</View>
-				<KeyboardAvoidingView behavior={'padding'} style={styles.formContainer}>
+				<View style={styles.formContainer}>
 					<View style={styles.inputCotainer}>
 						<FontAwesome
 							style={styles.inputIcon}
@@ -69,10 +70,10 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 						/>
 						<TextInput
 							style={styles.inputBox}
-							value={username}
+							value={userName}
 							onChangeText={setUsername}
 							placeholder="Usuario"
-							placeholderTextColor={Colors.lightGray}
+							placeholderTextColor={Colors.mediumGray}
 							autoCapitalize="none"
 						/>
 					</View>
@@ -88,7 +89,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 							value={password}
 							onChangeText={setPassword}
 							placeholder="Contraseña"
-							placeholderTextColor={Colors.lightGray}
+							placeholderTextColor={Colors.mediumGray}
 							autoCapitalize="none"
 							secureTextEntry={secureTextEntry}
 						/>
@@ -118,8 +119,8 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 					</View>
 					<TouchableHighlight
 						disabled={disabledLogin()}
-						style={[styles.signupButton, disabledLogin() ? styles.signupButtonDisabled : null]}
-						onPress={() => dispatch(login({ username, password }))}
+						style={[styles.signinButton, disabledLogin() ? styles.signinButtonDisabled : null]}
+						onPress={() => dispatch(login({ userName, password }))}
 						underlayColor={Colors.main}
 					>
 						<Text style={[styles.signinButtonText, disabledLogin() ? styles.signinButtonTextDisabled : null]}>
@@ -132,7 +133,17 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 					>
 						<Text style={styles.forgotPasswordText}>¿Olvidó su contraseña?</Text>
 					</TouchableOpacity>
-				</KeyboardAvoidingView>
+					<View style={styles.signupContainer}>
+						<Text style={styles.signupText}>
+							¿No tienes una cuenta?
+						</Text>
+						<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+							<Text style={[styles.signupText, styles.signupActionText]}>
+								Regístrate
+							</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
 		</ScrollView>
 	);
 };
@@ -141,13 +152,13 @@ const styles = StyleSheet.create({
 	scrollContainer: {
 		flex: 1,
 		backgroundColor: Colors.screenBackground,
-		paddingHorizontal: 25
+		paddingHorizontal: pageHorizontalPadding
 	},
 	container: {
 		flex: 1
 	},
 	logoContainer: {
-		flex: 1,
+		flex: 2,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -192,14 +203,14 @@ const styles = StyleSheet.create({
 	switchText: {
 		color: Colors.lightGray
 	},
-	signupButton: {
+	signinButton: {
 		...Buttons.base,
 		backgroundColor: transparent,
 		borderColor: Colors.main,
 		borderWidth: 1,
 		marginBottom: 20
 	},
-	signupButtonDisabled : {
+	signinButtonDisabled : {
 		borderColor: Colors.mediumGray,
 		borderWidth: 1,
 	},
@@ -214,6 +225,21 @@ const styles = StyleSheet.create({
 	forgotPasswordText: {
 		padding: 10,
 		color: Colors.lightGray
+	},
+	signupContainer: {
+		flex: 1, 
+		flexDirection: 'row', 
+		alignItems: 'flex-end', 
+		justifyContent: 'center', 
+		paddingBottom: 35
+	},
+	signupText: {
+		color: Colors.lightGray,
+		marginHorizontal: 5,
+		fontSize: 16
+	},
+	signupActionText: {
+		color: Colors.main
 	}
 });
 
