@@ -8,22 +8,22 @@ import {
 	TouchableOpacity,
 	TouchableHighlight,
 	Image,
-	KeyboardAvoidingView,
 	Switch
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 import { login } from '../../state/auth/actions';
 import { Colors, Buttons } from '../../styles';
 import { LoginScreenNavigationProp } from '../../navigation/auth/types';
 import Spinner from '../../components/Spinner';
 import CommonError from '../../components/CommonError';
-import { loginText } from '../../styles/typography';
 import { transparent } from '../../styles/colors';
 import { commonSelector } from '../../state/selectors';
 import { CLEAR_ERROR } from '../../state/common/types';
 import { pageHorizontalPadding } from '../../styles/spacing';
+import FormInput from '../../components/form/FormInput';
+import FormButton from '../../components/form/FormButton';
 
 interface LoginProps {
 	navigation: LoginScreenNavigationProp;
@@ -47,7 +47,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	return (
 		<ScrollView style={styles.scrollContainer}
 		contentContainerStyle={{ flexGrow: 1 }}>
-				{ loading && <Spinner text="Cargand..." visible={loading} />}
+				{ loading && <Spinner text="Cargando..." visible={loading} />}
 				{ error &&
 					<CommonError 
 						errorMessage={errorMessage}
@@ -61,38 +61,18 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 					/>
 				</View>
 				<View style={styles.formContainer}>
-					<View style={styles.inputCotainer}>
-						<FontAwesome
-							style={styles.inputIcon}
-							name="user"
-							color={Colors.lightGray}
-							size={20}
-						/>
-						<TextInput
-							style={styles.inputBox}
-							value={userName}
-							onChangeText={setUsername}
-							placeholder="Usuario"
-							placeholderTextColor={Colors.mediumGray}
-							autoCapitalize="none"
-						/>
-					</View>
-					<View style={styles.inputCotainer}>
-						<FontAwesome
-							style={styles.inputIcon}
-							name="lock"
-							color={Colors.lightGray}
-							size={20}
-						/>
-						<TextInput
-							style={styles.inputBox}
-							value={password}
-							onChangeText={setPassword}
-							placeholder="Contraseña"
-							placeholderTextColor={Colors.mediumGray}
-							autoCapitalize="none"
-							secureTextEntry={secureTextEntry}
-						/>
+					<FormInput 
+						value={userName}
+						onChangeValue={setUsername}
+						placeHolderText="Usuario"
+						iconName="user"
+					/>
+					<FormInput 
+						value={password}
+						onChangeValue={setPassword}
+						placeHolderText="Contraseña"
+						iconName="lock">
+
 						<View style={styles.eyeIconContainer}>
 							<TouchableOpacity onPress={()=>setSecureTextEntry(state => !state)}>
 								<Ionicons
@@ -103,7 +83,9 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 								/>
 							</TouchableOpacity>
 						</View>
-					</View>
+
+					</FormInput>
+					
 					<View style={styles.switchContainer}>
 						<Switch
 							style={styles.switch}
@@ -117,16 +99,13 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 							Recordar Usuario
 						</Text>
 					</View>
-					<TouchableHighlight
-						disabled={disabledLogin()}
-						style={[styles.signinButton, disabledLogin() ? styles.signinButtonDisabled : null]}
-						onPress={() => dispatch(login({ userName, password }))}
-						underlayColor={Colors.main}
-					>
-						<Text style={[styles.signinButtonText, disabledLogin() ? styles.signinButtonTextDisabled : null]}>
-							INGRESAR
-						</Text>
-					</TouchableHighlight>
+
+					<FormButton
+						isDisabled={disabledLogin}
+						onPressCallback={() => dispatch(login({ userName, password }))}
+						text="INGRESAR"
+					/>
+
 					<TouchableOpacity
 						style={{ alignItems: 'center' }}
 						onPress={() => navigation.navigate('Forgot')}
@@ -170,26 +149,9 @@ const styles = StyleSheet.create({
 	formContainer: {
 		flex: 1
 	},
-	inputCotainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		borderBottomColor: Colors.lightGray,
-		borderBottomWidth: 0.4,
-		marginBottom: 20
-	},
-	inputIcon: {
-		padding: 5
-	},
 	eyeIconContainer: {
 		flex: 1,
 		alignItems: 'flex-end'
-	},
-	inputBox: {
-		...loginText,
-		paddingTop: 10,
-		paddingRight: 10,
-		paddingBottom: 10,
-		paddingLeft: 10
 	},
 	switchContainer: {
 		flexDirection: 'row',

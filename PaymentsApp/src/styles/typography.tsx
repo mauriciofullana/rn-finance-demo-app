@@ -45,7 +45,7 @@ export const screenHeader = {
 	fontWeight: 'bold'
 };
 
-export const loginText = {
+export const inputText = {
 	color: Colors.loginText,
 	fontSize: baseFontSize
 }

@@ -11,7 +11,7 @@ interface ISpinnerProps {
 const bkSpinner: FunctionComponent<ISpinnerProps> = ({ visible, text }) => {
 	return (
 		<Spinner
-			visible={visible}
+			visible={true}
 			//textContent={text}
 			textStyle={styles.spinnerTextStyle}
 			color="#ff4800"
