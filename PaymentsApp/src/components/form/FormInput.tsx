@@ -9,11 +9,12 @@ interface IFormInputProps {
     value: string;
     onChangeValue(text: string): void;
     placeHolderText: string;
-    iconName?: string
-    children?: ReactNode
+    iconName?: string;
+    children?: ReactNode;
+    secureTextEntry?: boolean
 }
 
-const FormInput: FunctionComponent<IFormInputProps> = ({value, onChangeValue, placeHolderText, iconName, children}) => {
+const FormInput: FunctionComponent<IFormInputProps> = ({value, onChangeValue, placeHolderText, iconName, secureTextEntry = false, children}) => {
     return (
         <View style={styles.inputContainer}>
             {
@@ -32,6 +33,7 @@ const FormInput: FunctionComponent<IFormInputProps> = ({value, onChangeValue, pl
                 placeholder={placeHolderText}
                 placeholderTextColor={Colors.mediumGray}
                 autoCapitalize="none"
+                secureTextEntry={secureTextEntry}
             />
             {children}
         </View>

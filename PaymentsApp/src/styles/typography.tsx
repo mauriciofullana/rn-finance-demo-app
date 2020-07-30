@@ -5,7 +5,7 @@ export const largeFontSize = 24;
 export const buttonFontSize = 18;
 export const baseFontSize = 16;
 export const smallFontSize = 14;
-export const smallestFontSize = 10;
+export const smallestFontSize = 12;
 export const largeHeaderFontSize = 20;
 export const headerFontSize = 18;
 
@@ -13,49 +13,49 @@ const base = {
 	alignItems: 'center',
 	display: 'flex',
 	flexDirection: 'row',
-	justifyContent: 'center'
+	justifyContent: 'center',
 };
 
 export const link = {
 	color: Colors.thoughtbotRed,
-	fontWeight: 'bold'
+	fontWeight: 'bold',
 };
 
 export const bodyText = {
 	color: Colors.baseText,
 	fontSize: smallFontSize,
-	lineHeight: 19
+	lineHeight: 19,
 };
 
 export const headerText = {
 	color: Colors.darkText,
 	fontSize: headerFontSize,
-	fontWeight: 'bold'
+	fontWeight: 'bold',
 };
 
 export const descriptionText = {
 	color: Colors.baseText,
-	fontSize: smallFontSize
+	fontSize: smallFontSize,
 };
 
 export const screenHeader = {
 	...base,
 	color: Colors.baseText,
 	fontSize: largeFontSize,
-	fontWeight: 'bold'
+	fontWeight: 'bold',
 };
 
 export const inputText = {
 	color: Colors.loginText,
-	fontSize: baseFontSize
-}
+	fontSize: baseFontSize,
+};
 
 export const screenFooter = {
 	...base,
-	...descriptionText
+	...descriptionText,
 };
 
 export const sectionHeader = {
 	...base,
-	...headerText
+	...headerText,
 };

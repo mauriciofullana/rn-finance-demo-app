@@ -8,7 +8,7 @@ import {
 	TouchableOpacity,
 	TouchableHighlight,
 	Image,
-	Switch
+	Switch,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
@@ -34,95 +34,93 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	const [password, setPassword] = useState('');
 	const [secureTextEntry, setSecureTextEntry] = useState<boolean>(true);
 	const [isEnabled, setIsEnabled] = useState(false);
-	const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 	const dispatch = useDispatch();
 	const { error, errorMessage, loading } = useSelector(commonSelector);
 
 	const disabledLogin = () => {
 		return !userName || !password;
-	}
-
-	console.log('LOGIN SCREEEEEMN  --  ' + error);
+	};
 
 	return (
-		<ScrollView style={styles.scrollContainer}
-		contentContainerStyle={{ flexGrow: 1 }}>
-				{ loading && <Spinner text="Cargando..." visible={loading} />}
-				{ error &&
-					<CommonError 
-						errorMessage={errorMessage}
-						callBackFunction={() => dispatch({type: CLEAR_ERROR})}
-					/>
-				}
-				<View style={styles.logoContainer}>
-					<Image
-						style={styles.img}
-						source={require('../../../assets/logo.png')}
-					/>
-				</View>
-				<View style={styles.formContainer}>
-					<FormInput 
-						value={userName}
-						onChangeValue={setUsername}
-						placeHolderText="Usuario"
-						iconName="user"
-					/>
-					<FormInput 
-						value={password}
-						onChangeValue={setPassword}
-						placeHolderText="Contraseña"
-						iconName="lock">
-
-						<View style={styles.eyeIconContainer}>
-							<TouchableOpacity onPress={()=>setSecureTextEntry(state => !state)}>
-								<Ionicons
-									style={styles.inputIcon}
-									name={secureTextEntry ? 'md-eye' : 'md-eye-off'}
-									color={Colors.lightGray}
-									size={20}
-								/>
-							</TouchableOpacity>
-						</View>
-
-					</FormInput>
-					
-					<View style={styles.switchContainer}>
-						<Switch
-							style={styles.switch}
-							trackColor={{ false: Colors.lightGray, true: Colors.main }}
-							thumbColor={Colors.lightGray}
-							ios_backgroundColor="#3e3e3e"
-							onValueChange={toggleSwitch}
-							value={isEnabled}
-						/>
-						<Text style={styles.switchText}>
-							Recordar Usuario
-						</Text>
-					</View>
-
-					<FormButton
-						isDisabled={disabledLogin}
-						onPressCallback={() => dispatch(login({ userName, password }))}
-						text="INGRESAR"
-					/>
-
-					<TouchableOpacity
-						style={{ alignItems: 'center' }}
-						onPress={() => navigation.navigate('Forgot')}
-					>
-						<Text style={styles.forgotPasswordText}>¿Olvidó su contraseña?</Text>
-					</TouchableOpacity>
-					<View style={styles.signupContainer}>
-						<Text style={styles.signupText}>
-							¿No tienes una cuenta?
-						</Text>
-						<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-							<Text style={[styles.signupText, styles.signupActionText]}>
-								Regístrate
-							</Text>
+		<ScrollView
+			style={styles.scrollContainer}
+			contentContainerStyle={{ flexGrow: 1 }}
+		>
+			{loading && <Spinner text="Cargando..." visible={loading} />}
+			{error && (
+				<CommonError
+					errorMessage={errorMessage}
+					callBackFunction={() => dispatch({ type: CLEAR_ERROR })}
+				/>
+			)}
+			<View style={styles.logoContainer}>
+				<Image
+					style={styles.img}
+					source={require('../../../assets/logo.png')}
+				/>
+			</View>
+			<View style={styles.formContainer}>
+				<FormInput
+					value={userName}
+					onChangeValue={setUsername}
+					placeHolderText="Usuario"
+					iconName="user"
+				/>
+				<FormInput
+					value={password}
+					onChangeValue={setPassword}
+					placeHolderText="Contraseña"
+					iconName="lock"
+					secureTextEntry={secureTextEntry}
+				>
+					<View style={styles.eyeIconContainer}>
+						<TouchableOpacity
+							onPress={() => setSecureTextEntry((state) => !state)}
+						>
+							<Ionicons
+								style={styles.inputIcon}
+								name={secureTextEntry ? 'md-eye' : 'md-eye-off'}
+								color={Colors.lightGray}
+								size={20}
+							/>
 						</TouchableOpacity>
 					</View>
+				</FormInput>
+
+				<View style={styles.switchContainer}>
+					<Switch
+						style={styles.switch}
+						trackColor={{ false: Colors.lightGray, true: Colors.main }}
+						thumbColor={Colors.lightGray}
+						ios_backgroundColor="#3e3e3e"
+						onValueChange={toggleSwitch}
+						value={isEnabled}
+					/>
+					<Text style={styles.switchText}>Recordar Usuario</Text>
 				</View>
+
+				<FormButton
+					isDisabled={disabledLogin}
+					onPressCallback={() => dispatch(login({ userName, password }))}
+					text="INGRESAR"
+				/>
+
+				<TouchableOpacity
+					style={{ alignItems: 'center' }}
+					onPress={() => navigation.navigate('Forgot')}
+				>
+					<Text style={styles.forgotPasswordText}>¿Olvidó su contraseña?</Text>
+				</TouchableOpacity>
+				<View style={styles.signupContainer}>
+					<Text style={styles.signupText}>¿No tienes una cuenta?</Text>
+					<TouchableOpacity onPress={() => navigation.navigate('Signup')}>
+						<Text style={[styles.signupText, styles.signupActionText]}>
+							Regístrate
+						</Text>
+					</TouchableOpacity>
+				</View>
+			</View>
 		</ScrollView>
 	);
 };
@@ -131,78 +129,77 @@ const styles = StyleSheet.create({
 	scrollContainer: {
 		flex: 1,
 		backgroundColor: Colors.screenBackground,
-		paddingHorizontal: pageHorizontalPadding
+		paddingHorizontal: pageHorizontalPadding,
 	},
 	container: {
-		flex: 1
+		flex: 1,
 	},
 	logoContainer: {
 		flex: 2,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	img: {
 		width: '60%',
 		height: undefined,
-		aspectRatio: 598 / 176
+		aspectRatio: 598 / 176,
 	},
 	formContainer: {
-		flex: 1
+		flex: 1,
 	},
 	eyeIconContainer: {
 		flex: 1,
-		alignItems: 'flex-end'
+		alignItems: 'flex-end',
 	},
 	switchContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 10,
-		marginBottom: 20,
+		marginVertical: 10,
 	},
 	switch: {
-		marginRight: 10
+		marginRight: 10,
 	},
 	switchText: {
-		color: Colors.lightGray
+		color: Colors.lightGray,
 	},
 	signinButton: {
 		...Buttons.base,
 		backgroundColor: transparent,
 		borderColor: Colors.main,
 		borderWidth: 1,
-		marginBottom: 20
+		marginBottom: 20,
 	},
-	signinButtonDisabled : {
+	signinButtonDisabled: {
 		borderColor: Colors.mediumGray,
 		borderWidth: 1,
 	},
 	signinButtonText: {
 		color: Colors.main,
-		padding: 10
+		padding: 10,
 	},
 	signinButtonTextDisabled: {
 		color: Colors.mediumGray,
-		padding: 10
+		padding: 10,
 	},
 	forgotPasswordText: {
 		padding: 10,
-		color: Colors.lightGray
+		color: Colors.lightGray,
 	},
 	signupContainer: {
-		flex: 1, 
-		flexDirection: 'row', 
-		alignItems: 'flex-end', 
-		justifyContent: 'center', 
-		paddingBottom: 35
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'flex-end',
+		justifyContent: 'center',
+		paddingBottom: 35,
 	},
 	signupText: {
 		color: Colors.lightGray,
 		marginHorizontal: 5,
-		fontSize: 16
+		fontSize: 16,
 	},
 	signupActionText: {
-		color: Colors.main
-	}
+		color: Colors.main,
+	},
 });
 
 export default LoginScreen;
