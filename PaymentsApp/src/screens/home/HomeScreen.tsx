@@ -1,18 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableOpacity,
-	Image
-} from 'react-native';
-import {
-	FontAwesome
-} from '@expo/vector-icons';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
 import RecentTransactions from '../../components/home/RecentTransactions';
+import Welcome from '../../components/home/Welcome';
 
 interface HomeScreenProps {
 	navigation: HomeScreenNavigationProp;
@@ -26,7 +19,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 			reference: 'Pago Colegio',
 			date: new Date(),
 			amount: 550.0,
-			isDebit: true
+			isDebit: true,
 		},
 		{
 			id: 2,
@@ -34,7 +27,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 			reference: 'Alquiler casa Montevideo',
 			date: new Date(),
 			amount: 680.0,
-			isDebit: true
+			isDebit: true,
 		},
 		{
 			id: 3,
@@ -42,7 +35,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 			reference: 'Test credito',
 			date: new Date(),
 			amount: 15500.0,
-			isDebit: false
+			isDebit: false,
 		},
 		{
 			id: 4,
@@ -50,7 +43,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 			reference: 'Pago por clase de tiros libres',
 			date: new Date(),
 			amount: 15500.0,
-			isDebit: true
+			isDebit: true,
 		},
 		{
 			id: 5,
@@ -58,41 +51,13 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 			reference: 'Referencia',
 			date: new Date(),
 			amount: 50600.0,
-			isDebit: false
-		}
-    ];
+			isDebit: false,
+		},
+	];
 
 	return (
 		<View style={styles.container}>
-			<View style={{flex: 1, justifyContent: 'flex-end', alignItems: 'center', paddingHorizontal: 25 }}>
-				<Image
-					style={styles.imgLogo}
-					source={require('../../../assets/logo.png')}
-				/>
-				<View style={styles.welcome}>
-					<TouchableOpacity style={styles.welcomePicContainer}>
-						<FontAwesome
-							name="user-circle-o"
-							color={Colors.lightGray}
-							size={60}
-						/>
-					</TouchableOpacity>
-					<View style={styles.welcomeTextContainer}>
-						<View style={{ flexDirection: 'row', marginBottom: 5 }}>
-							<Text style={{ color: Colors.lightGray }}>Bienvenido, </Text>
-							<Text style={{ fontWeight: 'bold', color: Colors.lightGray }}>
-								Mauricio Fullana
-							</Text>
-						</View>
-						<Text style={{ fontSize: 13, color: Colors.lightGray }}>
-							Último acceso: 20 May 14:48
-						</Text>
-						<Text style={{ fontSize: 13, color: Colors.lightGray }}>
-							Último cambio de contraseña: 7 May 14:22
-						</Text>
-					</View>
-				</View>
-			</View>
+			<Welcome />
 			<View style={styles.divider} />
 			<View style={styles.recentTrasnsactionsContainer}>
 				<RecentTransactions movements={movements} />
@@ -104,7 +69,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: Colors.screenBackground
+		backgroundColor: Colors.screenBackground,
 	},
 	logoContainer: {
 		flex: 1,
@@ -132,21 +97,21 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 	},
 	recentTrasnsactionsContainer: {
-		flex: 2
+		flex: 2,
 	},
 	welcomePicContainer: {
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	img: {
 		width: 95,
 		height: 95,
 		borderRadius: 50,
 		borderColor: Colors.mediumGray,
-		borderWidth: 1
+		borderWidth: 1,
 	},
 	welcomeTextContainer: {
 		marginLeft: 10,
-		justifyContent: 'center'
+		justifyContent: 'center',
 	},
 	divider: {
 		//marginVertical: 40,
@@ -158,21 +123,21 @@ const styles = StyleSheet.create({
 	},
 	action: {
 		alignItems: 'center',
-		marginHorizontal: 20
+		marginHorizontal: 20,
 	},
 	iconContainer: {
 		marginBottom: 10,
 		borderRadius: 50,
 		borderColor: Colors.lightGray,
-		borderWidth: 1.2
+		borderWidth: 1.2,
 	},
 	icon: {
 		padding: 5,
-		backgroundColor: 'transparent'
+		backgroundColor: 'transparent',
 	},
 	sectionText: {
 		color: Colors.lightGray,
-	}
+	},
 });
 
 export default HomeScreen;

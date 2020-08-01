@@ -14,10 +14,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { login } from '../../state/auth/actions';
 import { Colors, Buttons } from '../../styles';
 import { LoginScreenNavigationProp } from '../../navigation/auth/types';
-import Spinner from '../../components/Spinner';
-import CommonError from '../../components/CommonError';
 import { transparent } from '../../styles/colors';
-import { commonSelector } from '../../state/selectors';
 import { pageHorizontalPadding } from '../../styles/spacing';
 import FormInput from '../../components/form/FormInput';
 import FormButton from '../../components/form/FormButton';
@@ -178,7 +175,6 @@ const styles = StyleSheet.create({
 	signupText: {
 		color: Colors.lightGray,
 		marginHorizontal: 5,
-		fontSize: 16,
 	},
 	signupActionText: {
 		color: Colors.main,
