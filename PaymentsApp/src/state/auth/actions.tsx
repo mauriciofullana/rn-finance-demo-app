@@ -88,6 +88,7 @@ export const signup = ({
 			if (response.data.status === 'Success') {
 				await AsyncStorage.setItem('userAccessToken', response.data.token);
 				dispatch({ type: AUTH_LOGIN, payload: response.data.user });
+				dispatch({ type: CLEAR_LOADING });
 			} else {
 				dispatch({ type: SET_ERROR, payload: response.data.error });
 			}

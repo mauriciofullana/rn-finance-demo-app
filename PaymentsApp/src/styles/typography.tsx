@@ -53,6 +53,7 @@ export const inputText = {
 export const inputErrorText = {
 	color: Colors.lightRed,
 	fontSize: smallestFontSize,
+	marginLeft: 10,
 };
 
 export const screenFooter = {

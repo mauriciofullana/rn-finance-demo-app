@@ -66,8 +66,6 @@ const SignupScreen: FunctionComponent = () => {
 			style={styles.container}
 			contentContainerStyle={{ flexGrow: 1 }}
 		>
-			<Spinner />
-			<CommonError />
 			<FloatingTitleTextInput
 				value={name}
 				onChangeValue={setName}

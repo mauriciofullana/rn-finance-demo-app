@@ -33,7 +33,6 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 	const [isEnabled, setIsEnabled] = useState(false);
 	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 	const dispatch = useDispatch();
-	const { error, errorMessage, loading } = useSelector(commonSelector);
 
 	const disabledLogin = () => {
 		return !userName || !password;
@@ -44,8 +43,6 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 			style={styles.scrollContainer}
 			contentContainerStyle={{ flexGrow: 1 }}
 		>
-			<Spinner />
-			<CommonError />
 			<View style={styles.logoContainer}>
 				<Image
 					style={styles.img}
@@ -66,18 +63,16 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 					iconName="lock"
 					secureTextEntry={secureTextEntry}
 				>
-					<View style={styles.eyeIconContainer}>
-						<TouchableOpacity
-							onPress={() => setSecureTextEntry((state) => !state)}
-						>
-							<Ionicons
-								style={styles.inputIcon}
-								name={secureTextEntry ? 'md-eye' : 'md-eye-off'}
-								color={Colors.lightGray}
-								size={20}
-							/>
-						</TouchableOpacity>
-					</View>
+					<TouchableOpacity
+						onPress={() => setSecureTextEntry((state) => !state)}
+					>
+						<Ionicons
+							style={styles.inputIcon}
+							name={secureTextEntry ? 'md-eye' : 'md-eye-off'}
+							color={Colors.lightGray}
+							size={20}
+						/>
+					</TouchableOpacity>
 				</FormInput>
 
 				<View style={styles.switchContainer}>
@@ -123,9 +118,6 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.screenBackground,
 		paddingHorizontal: pageHorizontalPadding,
 	},
-	container: {
-		flex: 1,
-	},
 	logoContainer: {
 		flex: 2,
 		justifyContent: 'center',
@@ -138,10 +130,6 @@ const styles = StyleSheet.create({
 	},
 	formContainer: {
 		flex: 1,
-	},
-	eyeIconContainer: {
-		flex: 1,
-		alignItems: 'flex-end',
 	},
 	inputIcon: {
 		padding: 5,

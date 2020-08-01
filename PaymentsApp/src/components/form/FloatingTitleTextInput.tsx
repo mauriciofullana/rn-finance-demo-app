@@ -1,6 +1,12 @@
 import React, { FunctionComponent, useState, ReactNode } from 'react';
-import { View, Animated, StyleSheet, TextInput } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import {
+	View,
+	Animated,
+	StyleSheet,
+	TextInput,
+	TouchableOpacity,
+} from 'react-native';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 
 import { Colors } from '../../styles';
@@ -12,7 +18,7 @@ import {
 } from '../../styles/typography';
 
 interface IFloatingTitleTextInputProps {
-	value: string;
+	value?: string;
 	onChangeValue(text: string): void;
 	placeHolderText: string;
 	iconName?: string;
@@ -130,7 +136,7 @@ const styles = StyleSheet.create({
 		height: 50,
 	},
 	inputContainerError: {
-		borderBottomColor: Colors.red,
+		borderBottomColor: Colors.lightRed,
 	},
 	inputBox: {
 		...inputText,
@@ -149,9 +155,12 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		left: 10,
 	},
+	clearIcon: {
+		color: Colors.mediumGray,
+		padding: 5,
+	},
 	errorMessageText: {
 		...inputErrorText,
-		marginLeft: 10,
 	},
 });
 
