@@ -1,12 +1,14 @@
 import React, { FunctionComponent, useState, ReactNode } from 'react';
-import { View, Text, Animated, StyleSheet, TextInput } from 'react-native';
+import { View, Animated, StyleSheet, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 import { Colors } from '../../styles';
 import {
 	inputText,
 	baseFontSize,
 	smallestFontSize,
+	inputErrorText,
 } from '../../styles/typography';
 
 interface IFloatingTitleTextInputProps {
@@ -16,6 +18,8 @@ interface IFloatingTitleTextInputProps {
 	iconName?: string;
 	children?: ReactNode;
 	secureTextEntry?: boolean;
+	errorMessage?: string;
+	onEndEditingFunction?: () => void;
 }
 
 const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = ({
@@ -25,6 +29,8 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 	iconName,
 	secureTextEntry = false,
 	children,
+	errorMessage,
+	onEndEditingFunction,
 }) => {
 	const position = new Animated.Value(0);
 
@@ -32,7 +38,7 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 		if (!value) {
 			Animated.timing(position, {
 				toValue: 1,
-				duration: 150,
+				duration: 100,
 				useNativeDriver: false,
 			}).start();
 		}
@@ -42,7 +48,7 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 		if (!value) {
 			Animated.timing(position, {
 				toValue: 0,
-				duration: 150,
+				duration: 100,
 			}).start();
 		}
 	};
@@ -64,49 +70,74 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 		};
 	};
 
+	const hasError = () => errorMessage !== '';
+
 	return (
-		<View style={styles.inputContainer}>
-			{iconName && (
-				<FontAwesome
-					style={styles.inputIcon}
-					name={iconName}
-					color={Colors.lightGray}
-					size={20}
+		<View style={styles.container}>
+			<View
+				style={[
+					styles.inputContainer,
+					hasError() ? styles.inputContainerError : null,
+				]}
+			>
+				{iconName && (
+					<FontAwesome
+						style={styles.inputIcon}
+						name={iconName}
+						color={Colors.lightGray}
+						size={20}
+					/>
+				)}
+				<Animated.Text style={[styles.titleStyles, animatedStyles()]}>
+					{placeHolderText}
+				</Animated.Text>
+				<TextInput
+					style={styles.inputBox}
+					value={value}
+					onChangeText={onChangeValue}
+					onFocus={handleFocus}
+					onBlur={handleBlur}
+					placeholderTextColor={Colors.mediumGray}
+					autoCapitalize="none"
+					secureTextEntry={secureTextEntry}
+					onEndEditing={onEndEditingFunction}
 				/>
+				{children}
+			</View>
+			{hasError() && (
+				<Animatable.Text
+					style={styles.errorMessageText}
+					animation="fadeInLeft"
+					duration={500}
+				>
+					{errorMessage}
+				</Animatable.Text>
 			)}
-			<Animated.Text style={[styles.titleStyles, animatedStyles()]}>
-				{placeHolderText}
-			</Animated.Text>
-			<TextInput
-				style={styles.inputBox}
-				value={value}
-				onChangeText={onChangeValue}
-				onFocus={handleFocus}
-				onBlur={handleBlur}
-				placeholderTextColor={Colors.mediumGray}
-				autoCapitalize="none"
-				secureTextEntry={secureTextEntry}
-			/>
-			{children}
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
+	container: {
+		marginBottom: 12,
+	},
 	inputContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		borderBottomColor: Colors.lightGray,
 		borderBottomWidth: 0.4,
-		marginBottom: 20,
+		marginBottom: 7,
 		height: 50,
+	},
+	inputContainerError: {
+		borderBottomColor: Colors.red,
 	},
 	inputBox: {
 		...inputText,
 		flex: 1,
 		paddingTop: 10,
 		paddingRight: 10,
-		paddingBottom: 10,
+		paddingBottom: 5,
 		paddingLeft: 10,
 	},
 	inputIcon: {
@@ -117,6 +148,10 @@ const styles = StyleSheet.create({
 		fontSize: baseFontSize,
 		position: 'absolute',
 		left: 10,
+	},
+	errorMessageText: {
+		...inputErrorText,
+		marginLeft: 10,
 	},
 });
 

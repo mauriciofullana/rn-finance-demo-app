@@ -4,9 +4,7 @@ import {
 	Text,
 	StyleSheet,
 	ScrollView,
-	TextInput,
 	TouchableOpacity,
-	TouchableHighlight,
 	Image,
 	Switch,
 } from 'react-native';
@@ -20,7 +18,6 @@ import Spinner from '../../components/Spinner';
 import CommonError from '../../components/CommonError';
 import { transparent } from '../../styles/colors';
 import { commonSelector } from '../../state/selectors';
-import { CLEAR_ERROR } from '../../state/common/types';
 import { pageHorizontalPadding } from '../../styles/spacing';
 import FormInput from '../../components/form/FormInput';
 import FormButton from '../../components/form/FormButton';
@@ -47,13 +44,8 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 			style={styles.scrollContainer}
 			contentContainerStyle={{ flexGrow: 1 }}
 		>
-			{loading && <Spinner text="Cargando..." visible={loading} />}
-			{error && (
-				<CommonError
-					errorMessage={errorMessage}
-					callBackFunction={() => dispatch({ type: CLEAR_ERROR })}
-				/>
-			)}
+			<Spinner />
+			<CommonError />
 			<View style={styles.logoContainer}>
 				<Image
 					style={styles.img}
@@ -150,6 +142,9 @@ const styles = StyleSheet.create({
 	eyeIconContainer: {
 		flex: 1,
 		alignItems: 'flex-end',
+	},
+	inputIcon: {
+		padding: 5,
 	},
 	switchContainer: {
 		flexDirection: 'row',
