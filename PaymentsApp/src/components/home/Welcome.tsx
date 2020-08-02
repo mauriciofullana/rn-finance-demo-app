@@ -1,7 +1,16 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	Image,
+	Alert,
+} from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
 
 import { Colors } from '../../styles';
 import { smallestFontSize } from '../../styles/typography';
@@ -10,9 +19,39 @@ import { authSelector } from '../../state/selectors';
 const Welcome: FunctionComponent = () => {
 	const { user } = useSelector(authSelector);
 
+	const verifyPermissions = async () => {
+		const result = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+		if (!result.granted) {
+			Alert.alert(
+				'Insufficient permissions!',
+				'You need to grant gallery permissions to use this feature.',
+				[{ text: 'OK' }]
+			);
+			return false;
+		}
+
+		return true;
+	};
+
+	const takeImageHandler = async () => {
+		const hasPermission = await verifyPermissions();
+		if (!hasPermission) {
+			return;
+		}
+		const image = await ImagePicker.launchImageLibraryAsync({
+			allowsEditing: true,
+			base64: true,
+		});
+
+		console.log(image);
+	};
+
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.welcomePicContainer}>
+			<TouchableOpacity
+				style={styles.welcomePicContainer}
+				onPress={takeImageHandler}
+			>
 				<FontAwesome name="user-circle-o" color={Colors.lightGray} size={60} />
 			</TouchableOpacity>
 			<View style={styles.welcomeTextContainer}>
