@@ -8,7 +8,7 @@ import {
 	Image,
 	Switch,
 } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 import { login } from '../../state/auth/actions';

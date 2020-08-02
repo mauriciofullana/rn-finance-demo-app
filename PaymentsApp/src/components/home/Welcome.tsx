@@ -11,49 +11,28 @@ const Welcome: FunctionComponent = () => {
 	const { user } = useSelector(authSelector);
 
 	return (
-		<View style={styles.contaienr}>
-			<Image
-				style={styles.imgLogo}
-				source={require('../../../assets/logo.png')}
-			/>
-			<View style={styles.textContainer}>
-				<TouchableOpacity style={styles.welcomePicContainer}>
-					<FontAwesome
-						name="user-circle-o"
-						color={Colors.lightGray}
-						size={60}
-					/>
-				</TouchableOpacity>
-				<View style={styles.welcomeTextContainer}>
-					<View style={styles.headerContainer}>
-						<Text style={styles.headerFirst}>Bienvenido, </Text>
-						<Text
-							style={styles.headerSecond}
-						>{`${user?.name} ${user?.lastName}`}</Text>
-					</View>
-					<Text style={styles.lastAccess}>Último acceso: 20 May 14:48</Text>
-					<Text style={styles.lastPassChange}>
-						Último cambio de contraseña: 7 May 14:22
-					</Text>
+		<View style={styles.container}>
+			<TouchableOpacity style={styles.welcomePicContainer}>
+				<FontAwesome name="user-circle-o" color={Colors.lightGray} size={60} />
+			</TouchableOpacity>
+			<View style={styles.welcomeTextContainer}>
+				<View style={styles.headerContainer}>
+					<Text style={styles.headerFirst}>Bienvenido, </Text>
+					<Text
+						style={styles.headerSecond}
+					>{`${user?.name} ${user?.lastName}`}</Text>
 				</View>
+				<Text style={styles.lastAccess}>Último acceso: 20 May 14:48</Text>
+				<Text style={styles.lastPassChange}>
+					Último cambio de contraseña: 7 May 14:22
+				</Text>
 			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
-	contaienr: {
-		flex: 1,
-		justifyContent: 'flex-end',
-		alignItems: 'center',
-		paddingHorizontal: 25,
-	},
-	imgLogo: {
-		width: '50%',
-		height: undefined,
-		aspectRatio: 598 / 176,
-	},
-	textContainer: {
+	container: {
 		marginTop: 40,
 		flexDirection: 'row',
 		justifyContent: 'center',
