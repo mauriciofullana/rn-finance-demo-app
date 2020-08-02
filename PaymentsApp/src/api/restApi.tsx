@@ -1,9 +1,16 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
-export default axios.create({
-    //baseURL: 'https://api-cert.bankingly.com/api',
-    baseURL: 'https://apps-restapi.herokuapp.com'
-    // headers: {
-    //     Authorization: 'Basic d2ViLmJhbmtpbmdseS5jb21cQzRKRzRBS0VRSVBUUUpCRUkyV1A6cElJNmh2NEpzS0d5NUR0NklnYmhzSUl3QWVaeUZ3QUtCc1gxQ3ZkUlZ1Znk='
-    // }
+// Create instance
+let instance = axios.create({
+	baseURL: 'https://apps-restapi.herokuapp.com',
 });
+
+// Set the AUTH token for any request
+instance.interceptors.request.use(async (config) => {
+	const token = await AsyncStorage.getItem('userAccessToken');
+	config.headers.Authorization = token ? `Bearer ${token}` : '';
+	return config;
+});
+
+export default instance;
