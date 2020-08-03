@@ -43,14 +43,7 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 	};
 
 	return (
-		<View
-			style={{
-				backgroundColor: Colors.lightWarmGray,
-				flex: 1,
-				borderTopStartRadius: 20,
-				borderTopEndRadius: 20,
-			}}
-		>
+		<>
 			<View style={styles.headerContainer}>
 				<View style={styles.headerText}>
 					<Text style={styles.headerMainText}>Transacciones recientes</Text>
@@ -86,13 +79,14 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 			<View style={{ paddingHorizontal: 20 }}>
 				<FlatList
 					data={movements}
+					scrollEnabled={false}
 					keyExtractor={(movement) => movement._id}
 					renderItem={(movement) => renderMovements(movement.item)}
 					ItemSeparatorComponent={renderSeparator}
 					showsVerticalScrollIndicator={false}
 				/>
 			</View>
-		</View>
+		</>
 	);
 };
 
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
 	listItemContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		height: 80,
+		height: 60,
 	},
 	listIconContainer: {
 		marginRight: 15,
