@@ -7,10 +7,12 @@ import {
 	StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
 import { IMovement } from '../../state/movements/types';
+import { baseFontSize, smallFontSize } from '../../styles/typography';
 
 interface IRecentTransactionsProps {
 	movements: IMovement[];
@@ -29,11 +31,14 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 					<Text style={styles.listItemReferenceText}>{movement.reference}</Text>
 				</View>
 				<View style={styles.listItemAmountContainer}>
-					<Text style={styles.listItemAmount}>
-						USD {movement.isDebit ? '-' : ''}
-						{movement.amount}
-					</Text>
+					<Text style={styles.listItemAmount}>USD {movement.amount}</Text>
 				</View>
+				<FontAwesome
+					style={styles.listItemIcon}
+					name={movement.isDebit ? 'caret-down' : 'caret-up'}
+					color={movement.isDebit ? Colors.red : Colors.green}
+					size={18}
+				/>
 			</View>
 		);
 	};
@@ -64,22 +69,39 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 							borderColor: Colors.main,
 							borderWidth: 1,
 							borderRadius: 5,
-							padding: 3,
+							padding: 2,
 							marginRight: 10,
+							alignItems: 'center',
+							width: 70,
 						}}
 					>
-						<Text style={{ color: Colors.main }}>COBROS</Text>
+						<Text style={{ color: Colors.main }}>TODOS</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={{
 							borderColor: Colors.mediumGray,
 							borderWidth: 1,
 							borderRadius: 5,
-							padding: 3,
+							padding: 2,
 							marginRight: 10,
+							alignItems: 'center',
+							width: 70,
 						}}
 					>
 						<Text style={{ color: Colors.mediumGray }}>PAGOS</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={{
+							borderColor: Colors.mediumGray,
+							borderWidth: 1,
+							borderRadius: 5,
+							padding: 2,
+							marginRight: 10,
+							alignItems: 'center',
+							width: 70,
+						}}
+					>
+						<Text style={{ color: Colors.mediumGray }}>COBROS</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -122,12 +144,13 @@ const styles = StyleSheet.create({
 	},
 	listItemSeparetor: {
 		borderColor: Colors.lightGray,
-		borderWidth: 0.35,
+		borderWidth: 0.5,
+		opacity: 0.3,
 	},
 	listItemContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		height: 80,
+		height: 70,
 	},
 	listIconContainer: {
 		marginRight: 15,
@@ -140,6 +163,7 @@ const styles = StyleSheet.create({
 	listItemHolderText: {
 		color: Colors.lightGray,
 		fontWeight: 'bold',
+		fontSize: smallFontSize,
 	},
 	listItemReferenceText: {
 		color: Colors.lightGray,
@@ -148,12 +172,14 @@ const styles = StyleSheet.create({
 	listItemAmountContainer: {
 		flex: 1,
 		alignItems: 'flex-end',
-		marginRight: 10,
 	},
 	listItemAmount: {
-		fontSize: 16,
+		fontSize: baseFontSize,
 		fontWeight: 'bold',
 		color: Colors.lightGray,
+	},
+	listItemIcon: {
+		marginLeft: 10,
 	},
 });
 
