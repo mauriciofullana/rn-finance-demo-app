@@ -52,7 +52,11 @@ const Welcome: FunctionComponent = () => {
 				style={styles.welcomePicContainer}
 				onPress={takeImageHandler}
 			>
-				<FontAwesome name="user-circle-o" color={Colors.lightGray} size={60} />
+				<Image
+					style={styles.img}
+					source={require('../../../assets/chino.png')}
+				/>
+				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={60} /> */}
 			</TouchableOpacity>
 			<View style={styles.welcomeTextContainer}>
 				<View style={styles.headerContainer}>
@@ -82,6 +86,13 @@ const styles = StyleSheet.create({
 	welcomeTextContainer: {
 		marginLeft: 10,
 		justifyContent: 'center',
+	},
+	img: {
+		width: 60,
+		height: 60,
+		borderRadius: 30,
+		borderColor: Colors.mediumGray,
+		borderWidth: 1,
 	},
 	headerContainer: {
 		flexDirection: 'row',

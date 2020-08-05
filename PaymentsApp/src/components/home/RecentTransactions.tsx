@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import {
 	View,
 	Text,
@@ -12,15 +12,25 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
 import { IMovement } from '../../state/movements/types';
-import { baseFontSize, smallFontSize } from '../../styles/typography';
+import {
+	baseFontSize,
+	smallFontSize,
+	containerHeaderText,
+} from '../../styles/typography';
+import { containerRaduis } from '../../styles/spacing';
 
 interface IRecentTransactionsProps {
 	movements: IMovement[];
 }
 
+const FILTER_ALL = 'FILTER_ALL';
+const FILTER_PAYMENTS = 'FILTER_PAYMENTS';
+const FILTER_CHARGES = 'FILTER_CHARGES';
+
 const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 	movements,
 }) => {
+	const [activeFilter, setActiveFilter] = useState<string>(FILTER_ALL);
 	const navigation = useNavigation<HomeScreenNavigationProp>();
 
 	const renderMovements = (movement: IMovement) => {
@@ -47,65 +57,51 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 		return <View style={styles.listItemSeparetor} />;
 	};
 
+	const renderHeaderButton = (filter: string, text: string) => {
+		const active = activeFilter === filter;
+		return (
+			<TouchableOpacity
+				style={[styles.headerButton, active ? styles.headerButtonActive : null]}
+				onPress={() => setActiveFilter(filter)}
+			>
+				<Text
+					style={[
+						styles.headerButtonText,
+						active ? styles.headerButtonTextActive : null,
+					]}
+				>
+					{text}
+				</Text>
+			</TouchableOpacity>
+		);
+	};
+
+	movements = movements.filter((movement) => {
+		if (activeFilter === FILTER_PAYMENTS) {
+			return movement.isDebit;
+		} else if (activeFilter === FILTER_CHARGES) {
+			return !movement.isDebit;
+		}
+
+		return movement;
+	});
+
 	return (
-		<View
-			style={{
-				backgroundColor: Colors.lightWarmGray,
-				flex: 1,
-				borderTopStartRadius: 20,
-				borderTopEndRadius: 20,
-			}}
-		>
+		<View style={styles.container}>
 			<View style={styles.headerContainer}>
-				<View style={styles.headerText}>
+				<View style={styles.headerTextContainer}>
 					<Text style={styles.headerMainText}>Transacciones recientes</Text>
 					<TouchableOpacity onPress={() => navigation.navigate('Movements')}>
 						<Text style={styles.headerSeeAllText}>Ver todas</Text>
 					</TouchableOpacity>
 				</View>
-				<View style={styles.headerButtons}>
-					<TouchableOpacity
-						style={{
-							borderColor: Colors.main,
-							borderWidth: 1,
-							borderRadius: 5,
-							padding: 2,
-							marginRight: 10,
-							alignItems: 'center',
-							width: 70,
-						}}
-					>
-						<Text style={{ color: Colors.main }}>TODOS</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={{
-							borderColor: Colors.mediumGray,
-							borderWidth: 1,
-							borderRadius: 5,
-							padding: 2,
-							marginRight: 10,
-							alignItems: 'center',
-							width: 70,
-						}}
-					>
-						<Text style={{ color: Colors.mediumGray }}>PAGOS</Text>
-					</TouchableOpacity>
-					<TouchableOpacity
-						style={{
-							borderColor: Colors.mediumGray,
-							borderWidth: 1,
-							borderRadius: 5,
-							padding: 2,
-							marginRight: 10,
-							alignItems: 'center',
-							width: 70,
-						}}
-					>
-						<Text style={{ color: Colors.mediumGray }}>COBROS</Text>
-					</TouchableOpacity>
+				<View style={styles.headerButtonsContainer}>
+					{renderHeaderButton(FILTER_ALL, 'TODOS')}
+					{renderHeaderButton(FILTER_PAYMENTS, 'PAGOS')}
+					{renderHeaderButton(FILTER_CHARGES, 'COBROS')}
 				</View>
 			</View>
-			<View style={{ paddingHorizontal: 20 }}>
+			<View style={{ paddingHorizontal: 20, flex: 1 }}>
 				<FlatList
 					data={movements}
 					keyExtractor={(movement) => movement._id}
@@ -119,28 +115,52 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 };
 
 const styles = StyleSheet.create({
+	container: {
+		backgroundColor: Colors.lightWarmGray,
+		flex: 1,
+		borderTopStartRadius: containerRaduis,
+		borderTopEndRadius: containerRaduis,
+	},
 	headerContainer: {
 		height: 90,
 		borderBottomColor: Colors.screenBackground,
 		borderBottomWidth: 1,
 		padding: 20,
 	},
-	headerText: {
+	headerTextContainer: {
 		flexDirection: 'row',
-		marginBottom: 12,
-	},
-	headerButtons: {
-		flexDirection: 'row',
+		marginBottom: 13,
 	},
 	headerMainText: {
 		flex: 1,
-		fontSize: 14,
 		color: Colors.lightGray,
+		...containerHeaderText,
 	},
 	headerSeeAllText: {
 		alignSelf: 'flex-end',
 		color: Colors.main,
-		fontSize: 14,
+		...containerHeaderText,
+	},
+	headerButtonsContainer: {
+		flexDirection: 'row',
+	},
+	headerButton: {
+		borderColor: Colors.mediumGray,
+		borderWidth: 1,
+		borderRadius: 5,
+		padding: 2,
+		marginRight: 10,
+		alignItems: 'center',
+		width: 70,
+	},
+	headerButtonActive: {
+		borderColor: Colors.main,
+	},
+	headerButtonText: {
+		color: Colors.mediumGray,
+	},
+	headerButtonTextActive: {
+		color: Colors.main,
 	},
 	listItemSeparetor: {
 		borderColor: Colors.lightGray,
@@ -151,10 +171,6 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		height: 70,
-	},
-	listIconContainer: {
-		marginRight: 15,
-		marginLeft: 10,
 	},
 	listItemInfoTextContainer: {
 		flex: 1,

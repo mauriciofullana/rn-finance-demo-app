@@ -65,3 +65,7 @@ export const sectionHeader = {
 	...base,
 	...headerText,
 };
+
+export const containerHeaderText = {
+	fontSize: smallFontSize,
+};
