@@ -1,16 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import {
-	View,
-	Text,
-	StyleSheet,
-	TouchableOpacity,
-	Image,
-	Alert,
-} from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { View, Text, StyleSheet, Image, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
 import { smallestFontSize } from '../../styles/typography';
@@ -48,23 +41,22 @@ const Welcome: FunctionComponent = () => {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity
+			<View
 				style={styles.welcomePicContainer}
-				onPress={takeImageHandler}
+				// onPress={takeImageHandler}
 			>
-				<Image
+				{/* <Image
 					style={styles.img}
 					source={require('../../../assets/chino.png')}
-				/>
-				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={60} /> */}
-			</TouchableOpacity>
-			<View style={styles.welcomeTextContainer}>
-				<View style={styles.headerContainer}>
-					<Text style={styles.headerFirst}>Bienvenido, </Text>
-					<Text
-						style={styles.headerSecond}
-					>{`${user?.name} ${user?.lastName}`}</Text>
-				</View>
+				/> */}
+				<FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} />
+			</View>
+			<View style={styles.headerContainer}>
+				<Text
+					style={styles.headerSecond}
+				>{`${user?.name} ${user?.lastName}`}</Text>
+			</View>
+			<View>
 				<Text style={styles.lastAccess}>Último acceso: 20 May 14:48</Text>
 				<Text style={styles.lastPassChange}>
 					Último cambio de contraseña: 7 May 14:22
@@ -76,27 +68,22 @@ const Welcome: FunctionComponent = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 40,
-		flexDirection: 'row',
 		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	welcomePicContainer: {
 		justifyContent: 'center',
 	},
-	welcomeTextContainer: {
-		marginLeft: 10,
-		justifyContent: 'center',
-	},
 	img: {
-		width: 60,
-		height: 60,
-		borderRadius: 30,
+		width: 100,
+		height: 100,
+		borderRadius: 50,
 		borderColor: Colors.mediumGray,
 		borderWidth: 1,
 	},
 	headerContainer: {
 		flexDirection: 'row',
-		marginBottom: 5,
+		marginVertical: 10,
 	},
 	headerFirst: {
 		color: Colors.lightGray,

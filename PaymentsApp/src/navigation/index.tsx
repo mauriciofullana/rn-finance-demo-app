@@ -1,19 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 
 import { authSelector } from '../state/selectors';
 import AuthStackNavigator from './auth';
-import MainNavigator from './main';
+import PrivateDrawerNavigator from './PrivateDrawer';
 
 const Navigator: FunctionComponent = () => {
 	const { isSignedIn } = useSelector(authSelector);
 
 	return (
-		// <NavigationContainer theme={DarkTheme}>
 		<NavigationContainer>
 			{!isSignedIn && <AuthStackNavigator />}
-			{isSignedIn && <MainNavigator />}
+			{isSignedIn && <PrivateDrawerNavigator />}
 		</NavigationContainer>
 	);
 };

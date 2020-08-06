@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import { DraweParamList } from './types';
 import MainNavigator from './main';
-import MovementsScreen from '../screens/movements/MovementsScreen';
+import DrawerContent from './Common/DrawerContent';
 
-const Drawer = createDrawerNavigator<DraweParamList>();
+const DrawerNav = createDrawerNavigator<DraweParamList>();
 
-const DrawerNavigator = () => {
+const DrawerNavigator: FunctionComponent = () => {
 	return (
-		<Drawer.Navigator initialRouteName="Home">
-			<Drawer.Screen name="Home" component={MainNavigator} />
-			{/* <Drawer.Screen name="Movements" component={MovementsScreen} /> */}
-		</Drawer.Navigator>
+		<DrawerNav.Navigator
+			drawerContent={(props) => {
+				return <DrawerContent {...props} />;
+			}}
+		>
+			<DrawerNav.Screen name="HomeScreen" component={MainNavigator} />
+		</DrawerNav.Navigator>
 	);
 };
 

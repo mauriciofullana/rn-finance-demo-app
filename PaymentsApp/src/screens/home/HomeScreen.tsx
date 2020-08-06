@@ -29,7 +29,6 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
 					source={require('../../../assets/logo.png')}
 				/>
 			</View>
-			<Welcome />
 			<View style={styles.recentTrasnsactionsContainer}>
 				<RecentTransactions movements={movements} />
 			</View>
