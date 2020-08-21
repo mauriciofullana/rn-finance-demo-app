@@ -12,7 +12,11 @@ import {
 	MaterialIcons,
 } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
-import { DrawerActions } from '@react-navigation/native';
+import {
+	DrawerActions,
+	CommonActions,
+	StackActions,
+} from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { logout } from '../../state/auth/actions';
@@ -25,7 +29,15 @@ export default function DrawerContent(
 	const dispatch = useDispatch();
 	const handleLogOut = () => {
 		props.navigation.dispatch(DrawerActions.closeDrawer());
-		dispatch(logout());
+
+		props.navigation.dispatch(
+			CommonActions.reset({
+				index: 0,
+				routes: [{ name: 'Home' }],
+			})
+		);
+
+		//dispatch(logout());
 	};
 
 	const renderDrawerItem = (
@@ -48,7 +60,10 @@ export default function DrawerContent(
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.welcomeContainer}>
+			<TouchableOpacity
+				style={styles.welcomeContainer}
+				onPress={() => props.navigation.navigate('UserProfile')}
+			>
 				<Welcome />
 			</TouchableOpacity>
 			<DrawerContentScrollView>

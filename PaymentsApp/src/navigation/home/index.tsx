@@ -7,7 +7,7 @@ import { Colors } from '../../styles';
 import HomeScreen from '../../screens/home/HomeScreen';
 import SettingsScreen from '../../screens/settings/SettingsScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
-import { screenHeaderOptions } from '../Common/CommonHeaderOption';
+import { ScreenHeaderCommonOptions } from '../Common/CommonHeaderOption';
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -26,7 +26,7 @@ const HomeStackNavigator: FunctionComponent = () => {
 				name="Home"
 				component={HomeScreen}
 				options={() =>
-					screenHeaderOptions({
+					ScreenHeaderCommonOptions({
 						title: '',
 						props: {
 							headerStyle: {

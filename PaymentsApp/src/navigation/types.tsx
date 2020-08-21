@@ -5,6 +5,7 @@ export type DraweParamList = {
 	Charge: undefined;
 	Pay: undefined;
 	Movements: undefined;
+	UserProfile: undefined;
 };
 
 export type PrivateDrawerNavigationProp = DrawerNavigationProp<DraweParamList>;

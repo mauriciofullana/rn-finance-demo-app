@@ -6,7 +6,10 @@ import { Colors } from '../../styles';
 import { ChargesStackParamList } from './types';
 import ChargeListScreen from '../../screens/charge/ChargeListScreen';
 import ChargeScreen from '../../screens/charge/ChargeScreen';
-import { screenHeaderOptions } from '../Common/CommonHeaderOption';
+import {
+	ScreenHeaderCommonOptions,
+	StackCommonOptions,
+} from '../Common/CommonHeaderOption';
 
 const ChargesStack = createStackNavigator<ChargesStackParamList>();
 
@@ -14,22 +17,12 @@ const ChargesStackNavigator: FunctionComponent = () => {
 	return (
 		<ChargesStack.Navigator
 			initialRouteName="ChargesList"
-			screenOptions={{
-				headerBackTitleVisible: false,
-				headerTitleAlign: 'center',
-				headerStyle: {
-					elevation: Platform.OS === 'ios' ? 0 : 4,
-					shadowOpacity: Platform.OS === 'ios' ? 0 : 4,
-					borderBottomWidth: 0,
-					backgroundColor: Colors.screenBackground,
-				},
-				headerTintColor: Colors.lightGray,
-			}}
+			screenOptions={StackCommonOptions()}
 		>
 			<ChargesStack.Screen
 				name="ChargesList"
 				component={ChargeListScreen}
-				options={() => screenHeaderOptions({ title: 'Cobros' })}
+				options={() => ScreenHeaderCommonOptions({ title: 'Cobros' })}
 			/>
 			<ChargesStack.Screen
 				name="Charge"
