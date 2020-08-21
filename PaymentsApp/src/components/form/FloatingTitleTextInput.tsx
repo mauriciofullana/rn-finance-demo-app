@@ -65,7 +65,7 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 	const animatedStyles = () => {
 		const topPosition = position.interpolate({
 			inputRange: [0, 1],
-			outputRange: [15, -5],
+			outputRange: [15, -3],
 		});
 
 		const size = position.interpolate({
