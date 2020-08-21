@@ -1,5 +1,10 @@
 import React, { FunctionComponent, useState } from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import {
+	StyleSheet,
+	ScrollView,
+	KeyboardAvoidingView,
+	Platform,
+} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { Colors } from '../../styles';
@@ -7,8 +12,6 @@ import { pageHorizontalPadding, pageTopPadding } from '../../styles/spacing';
 import { signup } from '../../state/auth/actions';
 import FormButton from '../../components/form/FormButton';
 import FloatingTitleTextInput from '../../components/form/FloatingTitleTextInput';
-import Spinner from '../../components/Spinner';
-import CommonError from '../../components/CommonError';
 
 const SignupScreen: FunctionComponent = () => {
 	const [name, setName] = useState('');
@@ -61,60 +64,66 @@ const SignupScreen: FunctionComponent = () => {
 		}
 	};
 
+	const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0;
+
 	return (
-		<ScrollView
+		<KeyboardAvoidingView
 			style={styles.container}
-			contentContainerStyle={{ flexGrow: 1 }}
+			behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+			enabled
+			keyboardVerticalOffset={keyboardVerticalOffset}
 		>
-			<FloatingTitleTextInput
-				value={name}
-				onChangeValue={setName}
-				placeHolderText="Nombre"
-				errorMessage={''}
-			/>
-			<FloatingTitleTextInput
-				value={lastName}
-				onChangeValue={setLastName}
-				placeHolderText="Apellido"
-				errorMessage={''}
-			/>
-			<FloatingTitleTextInput
-				value={email}
-				onChangeValue={setEmail}
-				placeHolderText="Correo electrónico"
-				onEndEditingFunction={validateEmail}
-				errorMessage={emailErrorMessage}
-			/>
-			<FloatingTitleTextInput
-				value={userName}
-				onChangeValue={setUserName}
-				placeHolderText="Nombre de usuario"
-				errorMessage={''}
-			/>
-			<FloatingTitleTextInput
-				value={password}
-				onChangeValue={setPassword}
-				placeHolderText="Contraseña"
-				secureTextEntry={true}
-				onEndEditingFunction={validateConfirmPassword}
-				errorMessage={''}
-			/>
-			<FloatingTitleTextInput
-				value={confirmPassword}
-				onChangeValue={setConfirmPassword}
-				placeHolderText="Confirmación de contraseña"
-				secureTextEntry={true}
-				onEndEditingFunction={validateConfirmPassword}
-				errorMessage={confirmPasswordErrorMessage}
-			/>
-			<FormButton
-				isDisabled={disabledSignup}
-				onPressCallback={() =>
-					dispatch(signup({ name, lastName, email, userName, password }))
-				}
-				text="REGISTRARSE"
-			/>
-		</ScrollView>
+			<ScrollView showsVerticalScrollIndicator={false}>
+				<FloatingTitleTextInput
+					value={name}
+					onChangeValue={setName}
+					placeHolderText="Nombre"
+					errorMessage={''}
+				/>
+				<FloatingTitleTextInput
+					value={lastName}
+					onChangeValue={setLastName}
+					placeHolderText="Apellido"
+					errorMessage={''}
+				/>
+				<FloatingTitleTextInput
+					value={email}
+					onChangeValue={setEmail}
+					placeHolderText="Correo electrónico"
+					onEndEditingFunction={validateEmail}
+					errorMessage={emailErrorMessage}
+				/>
+				<FloatingTitleTextInput
+					value={userName}
+					onChangeValue={setUserName}
+					placeHolderText="Nombre de usuario"
+					errorMessage={''}
+				/>
+				<FloatingTitleTextInput
+					value={password}
+					onChangeValue={setPassword}
+					placeHolderText="Contraseña"
+					secureTextEntry={true}
+					onEndEditingFunction={validateConfirmPassword}
+					errorMessage={''}
+				/>
+				<FloatingTitleTextInput
+					value={confirmPassword}
+					onChangeValue={setConfirmPassword}
+					placeHolderText="Confirmación de contraseña"
+					secureTextEntry={true}
+					onEndEditingFunction={validateConfirmPassword}
+					errorMessage={confirmPasswordErrorMessage}
+				/>
+				<FormButton
+					isDisabled={disabledSignup}
+					onPressCallback={() =>
+						dispatch(signup({ name, lastName, email, userName, password }))
+					}
+					text="REGISTRARSE"
+				/>
+			</ScrollView>
+		</KeyboardAvoidingView>
 	);
 };
 

@@ -38,23 +38,26 @@ const FloatingTitleTextInput: FunctionComponent<IFloatingTitleTextInputProps> = 
 	errorMessage,
 	onEndEditingFunction,
 }) => {
-	const position = new Animated.Value(0);
+	const position = new Animated.Value(value ? 1 : 0);
+	const [isFieldActive, setIsFieldActive] = useState(false);
 
 	const handleFocus = () => {
-		if (!value) {
+		if (!isFieldActive) {
+			setIsFieldActive(true);
 			Animated.timing(position, {
 				toValue: 1,
-				duration: 100,
+				duration: 350,
 				useNativeDriver: false,
 			}).start();
 		}
 	};
 
 	const handleBlur = () => {
-		if (!value) {
+		if (isFieldActive && !value) {
+			setIsFieldActive(true);
 			Animated.timing(position, {
 				toValue: 0,
-				duration: 100,
+				duration: 350,
 			}).start();
 		}
 	};
