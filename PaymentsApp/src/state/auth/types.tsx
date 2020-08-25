@@ -18,6 +18,7 @@ export interface IAuthState {
 // Describes availables action names
 export const AUTH_LOGIN = 'AUTH_LOGIN';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const USER_UPDATE = 'USER_UPDATE';
 
 // Describes Action types
 interface ILoginAction {
@@ -29,4 +30,13 @@ interface ILogOutAction {
 	type: typeof AUTH_LOGOUT;
 }
 
-export type AuthActions = ILoginAction | ILogOutAction | CommonActions;
+interface IUpdateAction {
+	type: typeof USER_UPDATE;
+	payload: IUser;
+}
+
+export type AuthActions =
+	| ILoginAction
+	| ILogOutAction
+	| IUpdateAction
+	| CommonActions;

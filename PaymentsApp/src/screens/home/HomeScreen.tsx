@@ -19,7 +19,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
 
 	useEffect(() => {
 		dispatch(movementsAction());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<View style={styles.container}>

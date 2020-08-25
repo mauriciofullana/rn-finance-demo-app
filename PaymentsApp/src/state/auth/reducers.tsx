@@ -1,4 +1,10 @@
-import { IAuthState, AuthActions, AUTH_LOGIN, AUTH_LOGOUT } from './types';
+import {
+	IAuthState,
+	AuthActions,
+	AUTH_LOGIN,
+	AUTH_LOGOUT,
+	USER_UPDATE,
+} from './types';
 
 const initialState: IAuthState = {
 	isSignedIn: false,
@@ -11,6 +17,8 @@ export default (state = initialState, action: AuthActions): IAuthState => {
 			return { ...state, isSignedIn: true, user: action.payload };
 		case AUTH_LOGOUT:
 			return { ...state, isSignedIn: false, user: undefined };
+		case USER_UPDATE:
+			return { ...state, user: action.payload };
 		default:
 			return state;
 	}

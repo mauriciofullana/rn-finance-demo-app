@@ -6,16 +6,18 @@ import {
 	Platform,
 } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { FontAwesome } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
 
 import { pageHorizontalPadding, pageTopPadding } from '../../styles/spacing';
 import { Colors } from '../../styles';
 import UserForm from '../../components/user/UserForm';
 import { authSelector } from '../../state/selectors';
 import { useSelector } from 'react-redux';
+import { updateUser } from '../../state/auth/actions';
 
 const UserProfileScreen: FunctionComponent = () => {
 	const { user } = useSelector(authSelector);
+	const dispatch = useDispatch();
 	const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0;
 	return (
 		<KeyboardAvoidingView
@@ -33,11 +35,18 @@ const UserProfileScreen: FunctionComponent = () => {
 						style={styles.img}
 						source={require('../../../assets/chino.png')}
 					/>
-					{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={130} /> */}
 				</TouchableOpacity>
 				<UserForm
 					formButtonText="ACTUALIZAR"
-					formButtonCallback={() => {}}
+					formButtonCallback={(
+						id: string,
+						name: string,
+						lastName: string,
+						email: string,
+						userName: string
+					) => {
+						dispatch(updateUser({ id, name, lastName, email, userName }));
+					}}
 					user={user}
 					updatePassword={false}
 				/>

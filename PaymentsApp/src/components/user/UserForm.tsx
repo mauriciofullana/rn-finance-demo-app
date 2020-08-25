@@ -32,8 +32,6 @@ const UserForm: FunctionComponent<IUserFormProps> = ({
 
 	const [emailErrorMessage, setemailErrorMessage] = useState<string>('');
 
-	const dispatch = useDispatch();
-
 	const disabledFormButton = () => {
 		return (
 			!name ||
@@ -117,7 +115,9 @@ const UserForm: FunctionComponent<IUserFormProps> = ({
 			)}
 			<FormButton
 				isDisabled={disabledFormButton}
-				onPressCallback={() => formButtonCallback()}
+				onPressCallback={() =>
+					formButtonCallback(user?._id, name, lastName, email, userName)
+				}
 				text={formButtonText}
 			/>
 		</>

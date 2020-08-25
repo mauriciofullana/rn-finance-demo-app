@@ -1,17 +1,24 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AuthActions, IUser } from './types';
-import restApi from '../../api/restApi';
-import { ThunkAction } from 'redux-thunk';
-import { RootState } from '../index';
 import { AsyncStorage } from 'react-native';
-import { SET_ERROR, SET_LOADING, CLEAR_LOADING } from '../common/types';
+import { ThunkAction } from 'redux-thunk';
 import { AxiosResponse } from 'axios';
 
-interface loginIn {
+import {
+	AUTH_LOGIN,
+	AUTH_LOGOUT,
+	AuthActions,
+	USER_UPDATE,
+	IUser,
+} from './types';
+import restApi from '../../api/restApi';
+import { RootState } from '../index';
+import { SET_ERROR, SET_LOADING, CLEAR_LOADING } from '../common/types';
+
+interface ILoginIn {
 	userName: string;
 	password: string;
 }
 
-interface loginOut {
+interface ILoginOut {
 	status: string;
 	token: string;
 	user: IUser;
@@ -21,12 +28,12 @@ interface loginOut {
 export const login = ({
 	userName,
 	password,
-}: loginIn): ThunkAction<void, RootState, unknown, AuthActions> => async (
+}: ILoginIn): ThunkAction<void, RootState, unknown, AuthActions> => async (
 	dispatch
 ) => {
 	dispatch({ type: SET_LOADING });
 	try {
-		const response = await restApi.post<loginIn, AxiosResponse<loginOut>>(
+		const response = await restApi.post<ILoginIn, AxiosResponse<ILoginOut>>(
 			'/signin',
 			{
 				userName,
@@ -48,7 +55,7 @@ export const login = ({
 	}
 };
 
-interface signupIn {
+interface ISignupIn {
 	name: string;
 	lastName: string;
 	email: string;
@@ -56,7 +63,7 @@ interface signupIn {
 	password: string;
 }
 
-interface signupOut {
+interface ISignupOut {
 	status: string;
 	token: string;
 	user: IUser;
@@ -69,12 +76,12 @@ export const signup = ({
 	email,
 	userName,
 	password,
-}: signupIn): ThunkAction<void, RootState, unknown, AuthActions> => async (
+}: ISignupIn): ThunkAction<void, RootState, unknown, AuthActions> => async (
 	dispatch
 ) => {
-	dispatch({ type: SET_LOADING });
+	dispatch({ type: CLEAR_LOADING });
 	try {
-		const response = await restApi.post<signupIn, AxiosResponse<signupOut>>(
+		const response = await restApi.post<ISignupIn, AxiosResponse<ISignupOut>>(
 			'/signup',
 			{
 				name,
@@ -107,4 +114,45 @@ export const logout = (): ThunkAction<
 > => async (dispatch) => {
 	await AsyncStorage.removeItem('userAccessToken');
 	dispatch({ type: AUTH_LOGOUT });
+};
+
+interface IUpdateUserIn {
+	id: string;
+	name: string;
+	lastName: string;
+	email: string;
+	userName: string;
+}
+
+interface IUpdateUserOut {
+	status: string;
+	user: IUser;
+	error: string;
+}
+
+export const updateUser = (
+	updateUserIn: IUpdateUserIn
+): ThunkAction<void, RootState, unknown, AuthActions> => async (dispatch) => {
+	dispatch({ type: SET_LOADING });
+	try {
+		const response = await restApi.put<
+			IUpdateUserIn,
+			AxiosResponse<IUpdateUserOut>
+		>(`/user/${updateUserIn.id}`, updateUserIn);
+
+		if (response.data) {
+			if (response.data.status == 'Success') {
+				dispatch({ type: USER_UPDATE, payload: response.data.user });
+				dispatch({
+					type: CLEAR_LOADING,
+					payload: 'Usuario actualizado correctamente',
+				});
+			} else {
+				dispatch({ type: SET_ERROR, payload: response.data.error });
+			}
+		}
+	} catch (error) {
+		console.log(error);
+		dispatch({ type: SET_ERROR, payload: 'Ha ocurrido un error' });
+	}
 };
