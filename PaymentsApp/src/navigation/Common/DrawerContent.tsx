@@ -29,15 +29,7 @@ export default function DrawerContent(
 	const dispatch = useDispatch();
 	const handleLogOut = () => {
 		props.navigation.dispatch(DrawerActions.closeDrawer());
-
-		props.navigation.dispatch(
-			CommonActions.reset({
-				index: 0,
-				routes: [{ name: 'Home' }],
-			})
-		);
-
-		//dispatch(logout());
+		dispatch(logout());
 	};
 
 	const renderDrawerItem = (
