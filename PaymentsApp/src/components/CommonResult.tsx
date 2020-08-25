@@ -1,39 +1,27 @@
 import React, { FunctionComponent } from 'react';
-import { Alert, StyleSheet, Text, Modal } from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { CLEAR_ERROR } from '../state/common/types';
+import { CLEAR_RESULT } from '../state/common/types';
 import { commonSelector } from '../state/selectors';
-import { Colors } from '../styles';
-import { View } from 'react-native-animatable';
 
 const CommonResult: FunctionComponent = () => {
 	const dispatch = useDispatch();
-	const { error, errorMessage, message, loading } = useSelector(commonSelector);
+	const { showResult, error, message } = useSelector(commonSelector);
+
+	const alertTitle = error ? 'Error' : '';
 
 	return (
 		<>
-			{error &&
-				Alert.alert('Error', errorMessage, [
+			{showResult &&
+				Alert.alert(alertTitle, message, [
 					{
 						text: 'OK',
-						onPress: () => dispatch({ type: CLEAR_ERROR }),
+						onPress: () => dispatch({ type: CLEAR_RESULT }),
 					},
 				])}
-			{loading && (
-				<Modal>
-					<Text>TU VIEJA</Text>
-				</Modal>
-			)}
 		</>
 	);
 };
-
-const styles = StyleSheet.create({
-	spinnerTextStyle: {
-		color: Colors.main,
-	},
-});
 
 export default CommonResult;

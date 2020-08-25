@@ -1,7 +1,7 @@
 import {
 	CommonActions,
-	SET_ERROR,
-	CLEAR_ERROR,
+	SET_RESULT,
+	CLEAR_RESULT,
 	ICommonState,
 	SET_LOADING,
 	CLEAR_LOADING,
@@ -9,23 +9,26 @@ import {
 
 const initialState: ICommonState = {
 	error: false,
-	errorMessage: '',
+	showResult: false,
 	loading: false,
+	message: '',
 };
 
 export default (state = initialState, action: CommonActions): ICommonState => {
 	switch (action.type) {
-		case SET_ERROR:
+		case SET_RESULT:
 			return {
 				...state,
-				error: true,
-				errorMessage: action.payload,
+				showResult: true,
+				error: action.payload.error,
+				message: action.payload.message,
 			};
-		case CLEAR_ERROR:
+		case CLEAR_RESULT:
 			return {
 				...state,
+				showResult: false,
 				error: false,
-				errorMessage: '',
+				message: '',
 				loading: false,
 			};
 		case SET_LOADING:
