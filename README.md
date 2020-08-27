@@ -1,6 +1,6 @@
 # Finance Demo App
 
-React Native app built using Expo connected to Node.js REST Api.
+React Native app built using Expo connected to Node.js REST Api and cloud mongoDB.
 
 ROAD MAP FUNCTIONALITIES:
 
