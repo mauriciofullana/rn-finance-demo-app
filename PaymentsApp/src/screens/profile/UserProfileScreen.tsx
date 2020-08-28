@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
 		paddingTop: pageTopPadding,
 	},
 	img: {
-		width: 130,
-		height: 130,
-		borderRadius: 65,
-		borderColor: Colors.mediumGray,
-		borderWidth: 2,
+		width: 140,
+		height: 140,
+		borderRadius: 75,
+		borderColor: Colors.mainOpacity,
+		borderWidth: 3,
 	},
 	userPicContainer: {
 		justifyContent: 'center',

@@ -45,11 +45,11 @@ const Welcome: FunctionComponent = () => {
 				style={styles.welcomePicContainer}
 				// onPress={takeImageHandler}
 			>
-				{/* <Image
+				<Image
 					style={styles.img}
 					source={require('../../../assets/chino.png')}
-				/> */}
-				<FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} />
+				/>
+				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} /> */}
 			</View>
 			<View style={styles.headerContainer}>
 				<Text

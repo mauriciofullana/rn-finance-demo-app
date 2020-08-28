@@ -1,5 +1,4 @@
 import React, { useState, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import FloatingTitleTextInput from '../form/FloatingTitleTextInput';
 import FormButton from '../form/FormButton';
 import { IUser } from '../../state/auth/types';

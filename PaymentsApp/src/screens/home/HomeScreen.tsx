@@ -26,7 +26,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
 			<View style={styles.logoContainer}>
 				<Image
 					style={styles.imgLogo}
-					source={require('../../../assets/logo.png')}
+					source={require('../../../assets/logo2.png')}
 				/>
 			</View>
 			<View style={styles.recentTrasnsactionsContainer}>

@@ -15,6 +15,7 @@ export const transparent = 'rgba(0, 0, 0, 0)';
 export const white = '#FFFFFF';
 
 export const main = '#f4351e';
+export const mainOpacity = 'rgba(244, 53, 30, 0.3)';
 export const mainDisabled = 'rgba(244, 53, 30, 0.5)';
 export const secondary = '#f4351e';
 export const header = '#030303';

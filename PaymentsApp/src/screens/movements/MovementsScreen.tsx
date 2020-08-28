@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import { Colors } from '../../styles';
-import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const MovementsScreen: FunctionComponent = () => {
 	const movements = [
@@ -102,11 +102,14 @@ const MovementsScreen: FunctionComponent = () => {
 					<Text style={styles.listItemReferenceText}>{movement.reference}</Text>
 				</View>
 				<View style={styles.listItemAmountContainer}>
-					<Text style={styles.listItemAmount}>
-						USD {movement.isDebit ? '-' : ''}
-						{movement.amount}
-					</Text>
+					<Text style={styles.listItemAmount}>USD {movement.amount}</Text>
 				</View>
+				<FontAwesome
+					style={styles.listItemIcon}
+					name={movement.isDebit ? 'caret-down' : 'caret-up'}
+					color={movement.isDebit ? Colors.red : Colors.green}
+					size={18}
+				/>
 			</View>
 		);
 	};
@@ -221,6 +224,9 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: 'bold',
 		color: Colors.lightGray,
+	},
+	listItemIcon: {
+		marginLeft: 10,
 	},
 });
 

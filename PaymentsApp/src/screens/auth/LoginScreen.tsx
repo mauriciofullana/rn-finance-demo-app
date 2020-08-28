@@ -43,7 +43,7 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 			<View style={styles.logoContainer}>
 				<Image
 					style={styles.img}
-					source={require('../../../assets/logo.png')}
+					source={require('../../../assets/logo2.png')}
 				/>
 			</View>
 			<View style={styles.formContainer}>
