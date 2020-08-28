@@ -2,6 +2,12 @@
 
 React Native app built using Expo connected to Node.js REST Api and cloud mongoDB.
 
+Some used packages:
+
+- React Navigation 5x
+- Redux
+- Redux Thunk
+
 ROAD MAP FUNCTIONALITIES:
 
 - Sing Up
