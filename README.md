@@ -14,6 +14,7 @@ ROAD MAP FUNCTIONALITIES:
 - Sign In
   - User credentials
   - Google Authentication
+  - Fingerprint/Face ID
 - Sign Out
 - User Profile
 - Home Screen
