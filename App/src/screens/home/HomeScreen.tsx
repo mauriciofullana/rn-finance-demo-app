@@ -1,13 +1,15 @@
-import React, { FunctionComponent, useEffect } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { movements as movementsAction } from '../../state/movements/actions';
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/main/types';
 import RecentTransactions from '../../components/home/RecentTransactions';
-import Welcome from '../../components/home/Welcome';
+import ProductsCarousel from '../../components/home/ProductsCarousel';
 import { movementsSelector } from '../../state/selectors';
+import { Ionicons } from '@expo/vector-icons';
+import { baseFontSize } from '../../styles/typography';
 
 interface HomeScreenProps {
 	navigation: HomeScreenNavigationProp;
@@ -23,12 +25,19 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.logoContainer}>
-				<Image
-					style={styles.imgLogo}
-					source={require('../../../assets/logo2.png')}
+			<TouchableOpacity style={styles.accountsLinkContainer}>
+				<Text style={styles.accountsLinkText}>MIS CUENTAS</Text>
+				<Ionicons
+					style={{ paddingTop: 0.7 }}
+					name="ios-arrow-forward"
+					size={18}
+					color={Colors.mediumGray}
 				/>
+			</TouchableOpacity>
+			<View style={styles.productsCarouselContainer}>
+				<ProductsCarousel />
 			</View>
+
 			<View style={styles.recentTrasnsactionsContainer}>
 				<RecentTransactions movements={movements} />
 			</View>
@@ -41,18 +50,21 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: Colors.screenBackground,
 	},
-	logoContainer: {
-		alignItems: 'center',
-		paddingHorizontal: 25,
+	accountsLinkContainer: {
+		flexDirection: 'row',
+		alignSelf: 'center',
 	},
-	imgLogo: {
-		width: '50%',
-		height: undefined,
-		aspectRatio: 598 / 176,
+	accountsLinkText: {
+		color: Colors.mediumGray,
+		fontSize: baseFontSize,
+		marginRight: 10,
+	},
+	productsCarouselContainer: {
+		marginTop: 10,
 	},
 	recentTrasnsactionsContainer: {
 		flex: 1,
-		marginTop: 45,
+		marginTop: 30,
 	},
 });
 

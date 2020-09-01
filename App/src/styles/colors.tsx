@@ -21,7 +21,7 @@ export const secondary = '#f4351e';
 export const header = '#030303';
 export const screenBackground = '#3F4044';
 
-export const baseText = white;
+export const baseText = lightGray;
 export const darkText = darkestGray;
 export const loginText = white;
 export const sectionBackground = lightWarmGray;

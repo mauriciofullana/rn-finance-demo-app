@@ -5,6 +5,7 @@ import { DraweParamList } from './types';
 import MainNavigator from './main';
 import DrawerContent from './Common/DrawerContent';
 import UserProfileStackNavigator from './userProfile';
+import HomeStackNavigator from './home';
 
 const DrawerNav = createDrawerNavigator<DraweParamList>();
 
@@ -15,7 +16,7 @@ const DrawerNavigator: FunctionComponent = () => {
 				return <DrawerContent {...props} />;
 			}}
 		>
-			<DrawerNav.Screen name="HomeScreen" component={MainNavigator} />
+			<DrawerNav.Screen name="HomeScreen" component={HomeStackNavigator} />
 			<DrawerNav.Screen
 				name="UserProfile"
 				component={UserProfileStackNavigator}
