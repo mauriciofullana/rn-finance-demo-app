@@ -42,9 +42,17 @@ const ProductsCarousel = () => {
 	const { width, height } = Dimensions.get('window');
 	const carouselRef = useRef(null);
 	const [activeSlide, setActiveSlide] = useState(0);
+	const [fedeInRight, setFedeInRight] = useState(false);
 
-	const renderItem = ({ item }: any) => {
-		return <ProductsCarouselItem item={item} />;
+	const renderItem = ({ item, index }: any) => {
+		const active = index === activeSlide;
+		return (
+			<ProductsCarouselItem
+				item={item}
+				active={active}
+				fedeInRight={fedeInRight}
+			/>
+		);
 	};
 
 	const renderPagination = () => {
@@ -79,7 +87,12 @@ const ProductsCarousel = () => {
 				renderItem={renderItem}
 				sliderWidth={width}
 				itemWidth={width}
-				onSnapToItem={(index) => setActiveSlide(index)}
+				onSnapToItem={(index) => {
+					setFedeInRight(() => {
+						return index > activeSlide;
+					});
+					setActiveSlide(index);
+				}}
 			/>
 			<View style={styles.carouselBottomBorder} />
 			{renderPagination()}
