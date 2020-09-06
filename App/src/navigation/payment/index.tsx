@@ -1,8 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Platform, StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Colors } from '../../styles';
 import { ChargesStackParamList } from './types';
 import ChargeListScreen from '../../screens/charge/ChargeListScreen';
 import ChargeScreen from '../../screens/charge/ChargeScreen';

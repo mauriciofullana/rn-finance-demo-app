@@ -6,6 +6,7 @@ import MainNavigator from './main';
 import DrawerContent from './Common/DrawerContent';
 import UserProfileStackNavigator from './userProfile';
 import HomeStackNavigator from './home';
+import ProductsStackNavigator from './products';
 
 const DrawerNav = createDrawerNavigator<DraweParamList>();
 
@@ -17,10 +18,8 @@ const DrawerNavigator: FunctionComponent = () => {
 			}}
 		>
 			<DrawerNav.Screen name="HomeScreen" component={HomeStackNavigator} />
-			<DrawerNav.Screen
-				name="UserProfile"
-				component={UserProfileStackNavigator}
-			/>
+			<DrawerNav.Screen name="ProductsScreen" component={ProductsStackNavigator} />
+			<DrawerNav.Screen name="UserProfile" component={UserProfileStackNavigator} />
 		</DrawerNav.Navigator>
 	);
 };

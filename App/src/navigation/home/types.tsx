@@ -2,6 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 export type HomeStackParamList = {
 	Home: undefined;
+	ProductsList: undefined;
 	Movements: undefined;
 	Settings: undefined;
 };

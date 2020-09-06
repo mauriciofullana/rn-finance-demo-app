@@ -14,8 +14,6 @@ import {
 import { useDispatch } from 'react-redux';
 import {
 	DrawerActions,
-	CommonActions,
-	StackActions,
 } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -63,6 +61,13 @@ export default function DrawerContent(
 					{renderDrawerItem('Inicio', 'Home', true, () => (
 						<MaterialCommunityIcons
 							name="home"
+							color={Colors.lightGray}
+							size={26}
+						/>
+					))}
+					{renderDrawerItem('Mis Cuentas', 'ProductsScreen', true, () => (
+						<MaterialCommunityIcons
+							name="bank"
 							color={Colors.lightGray}
 							size={26}
 						/>

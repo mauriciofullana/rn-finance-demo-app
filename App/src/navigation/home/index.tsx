@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { HomeStackParamList } from './types';
@@ -8,6 +8,7 @@ import HomeScreen from '../../screens/home/HomeScreen';
 import SettingsScreen from '../../screens/settings/SettingsScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
 import { ScreenHeaderCommonOptions } from '../Common/CommonHeaderOption';
+import ProductsListScreen from '../../screens/products/ProductsListScreen';
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -39,6 +40,7 @@ const HomeStackNavigator: FunctionComponent = () => {
 					})
 				}
 			/>
+			<HomeStack.Screen name="ProductsList" component={ProductsListScreen} />
 			<HomeStack.Screen name="Settings" component={SettingsScreen} />
 			<HomeStack.Screen name="Movements" component={MovementsScreen} />
 		</HomeStack.Navigator>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { movements as movementsAction } from '../../state/movements/actions';
 import { Colors } from '../../styles';
-import { HomeScreenNavigationProp } from '../../navigation/main/types';
+import { HomeScreenNavigationProp } from '../../navigation/home/types';
 import RecentTransactions from '../../components/home/RecentTransactions';
 import ProductsCarousel from '../../components/home/ProductsCarousel';
 import { movementsSelector } from '../../state/selectors';
@@ -15,7 +15,7 @@ interface HomeScreenProps {
 	navigation: HomeScreenNavigationProp;
 }
 
-const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
+const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const { movements } = useSelector(movementsSelector);
 
@@ -25,7 +25,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = () => {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.accountsLinkContainer}>
+			<TouchableOpacity style={styles.accountsLinkContainer} onPress={()=>navigation.navigate('ProductsList')}>
 				<Text style={styles.accountsLinkText}>MIS CUENTAS</Text>
 				<Ionicons
 					style={{ paddingTop: 0.7 }}
