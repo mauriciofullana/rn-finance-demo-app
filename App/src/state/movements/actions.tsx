@@ -1,14 +1,15 @@
-import { AsyncStorage } from 'react-native';
 import { ThunkAction } from 'redux-thunk';
 import { AxiosResponse } from 'axios';
 
 import { MovementsActions, MOVEMENTS_FETCH, IMovement } from './types';
 import restApi from '../../api/restApi';
 import { RootState } from '../index';
-import { SET_ERROR, SET_LOADING, CLEAR_LOADING } from '../common/types';
+import { SET_RESULT, SET_LOADING, CLEAR_LOADING } from '../common/types';
 
-interface movementsOut {
+interface IMovementsOut {
 	movements: IMovement[];
+	error: string;
+	status: string;
 }
 
 export const movements = (): ThunkAction<
@@ -19,18 +20,32 @@ export const movements = (): ThunkAction<
 > => async (dispatch) => {
 	dispatch({ type: SET_LOADING });
 	try {
-		const response = await restApi.get<any, AxiosResponse<movementsOut>>(
+		const response = await restApi.get<any, AxiosResponse<IMovementsOut>>(
 			'/movements'
 		);
 
-		if (response.data) {
+		if (response.data.status == 'Success') {
 			dispatch({ type: MOVEMENTS_FETCH, payload: response.data.movements });
 			dispatch({ type: CLEAR_LOADING });
 		} else {
-			dispatch({ type: SET_ERROR, payload: 'Ha ocurrido un error' });
+			dispatch({
+				type: SET_RESULT,
+				payload: {
+					error: true,
+					message: response.data.error,
+					showResult: true,
+				},
+			});
 		}
 	} catch (error) {
 		console.log(error);
-		dispatch({ type: SET_ERROR, payload: 'Ha ocurrido un error' });
+		dispatch({
+			type: SET_RESULT,
+			payload: {
+				error: true,
+				message: 'Ha ocurrido un error',
+				showResult: true,
+			},
+		});
 	}
 };
