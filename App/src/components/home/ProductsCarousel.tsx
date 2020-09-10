@@ -6,33 +6,6 @@ import { Colors } from '../../styles';
 import ProductsCarouselItem from './ProductsCarouselItem';
 import { IProduct } from '../../state/products/types';
 
-const dummyData = [
-	{
-		type: 'CUENTA CORRIENTE',
-		amount: 550.2,
-		currency: 'USD',
-		accountNumber: 'xxxx-091',
-	},
-	{
-		type: 'CUENTA CORRIENTE',
-		amount: 1236.0,
-		currency: 'USD',
-		accountNumber: 'xxxx-091',
-	},
-	{
-		type: 'CAJA DE AHORROS',
-		amount: 550.2,
-		currency: 'UYU',
-		accountNumber: 'xxxx-091',
-	},
-	{
-		type: 'TARJETA DE CREDITO',
-		amount: 2000.0,
-		currency: 'USD',
-		accountNumber: 'xxxx-091',
-	},
-];
-
 interface IProductsCarouselProps {
 	products: IProduct[];
 }
@@ -59,7 +32,7 @@ const ProductsCarousel: FunctionComponent<IProductsCarouselProps> = ({
 	const renderPagination = () => {
 		return (
 			<Pagination
-				dotsLength={dummyData.length}
+				dotsLength={products.length}
 				activeDotIndex={activeSlide}
 				containerStyle={{ paddingTop: 20, paddingBottom: 0 }}
 				dotStyle={{

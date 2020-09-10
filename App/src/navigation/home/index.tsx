@@ -7,7 +7,7 @@ import { Colors } from '../../styles';
 import HomeScreen from '../../screens/home/HomeScreen';
 import SettingsScreen from '../../screens/settings/SettingsScreen';
 import MovementsScreen from '../../screens/movements/MovementsScreen';
-import { ScreenHeaderCommonOptions } from '../Common/CommonHeaderOption';
+import { ScreenHeaderCommonOptions, StackCommonOptions } from '../Common/CommonHeaderOption';
 import ProductsListScreen from '../../screens/products/ProductsListScreen';
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -16,12 +16,7 @@ const HomeStackNavigator: FunctionComponent = () => {
 	return (
 		<HomeStack.Navigator
 			initialRouteName="Home"
-			screenOptions={{
-				headerStyle: {
-					backgroundColor: Colors.screenBackground,
-				},
-				headerTintColor: Colors.white,
-			}}
+			screenOptions={StackCommonOptions()}
 		>
 			<HomeStack.Screen
 				name="Home"
@@ -40,7 +35,9 @@ const HomeStackNavigator: FunctionComponent = () => {
 					})
 				}
 			/>
-			<HomeStack.Screen name="ProductsList" component={ProductsListScreen} />
+			<HomeStack.Screen name="ProductsList" component={ProductsListScreen} options={{
+				headerTitle: 'Mis Cuentas'
+			}} />
 			<HomeStack.Screen name="Settings" component={SettingsScreen} />
 			<HomeStack.Screen name="Movements" component={MovementsScreen} />
 		</HomeStack.Navigator>

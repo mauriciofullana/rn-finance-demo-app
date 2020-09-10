@@ -25,9 +25,9 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 						animation={fedeInRight ? 'fadeInRightBig' : 'fadeInLeftBig'}
 						direction="alternate"
 					>
-						<Text
-							style={styles.header}
-						>{`${item.productType}  ${item.productNumber}`}</Text>
+						<Text style={styles.header}>{`${item.productType}  ${
+							'XXXX-' + item.productNumber.substr(item.productNumber.length - 3)
+						}`}</Text>
 					</Animatable.Text>
 				)}
 			</View>
