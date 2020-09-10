@@ -1,15 +1,10 @@
-import React, { useRef, useState } from 'react';
-import {
-	View,
-	Text,
-	Dimensions,
-	TouchableOpacity,
-	StyleSheet,
-} from 'react-native';
+import React, { useRef, useState, FunctionComponent } from 'react';
+import { View, Dimensions, StyleSheet } from 'react-native';
 
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import { Colors } from '../../styles';
 import ProductsCarouselItem from './ProductsCarouselItem';
+import { IProduct } from '../../state/products/types';
 
 const dummyData = [
 	{
@@ -38,7 +33,13 @@ const dummyData = [
 	},
 ];
 
-const ProductsCarousel = () => {
+interface IProductsCarouselProps {
+	products: IProduct[];
+}
+
+const ProductsCarousel: FunctionComponent<IProductsCarouselProps> = ({
+	products,
+}) => {
 	const { width, height } = Dimensions.get('window');
 	const carouselRef = useRef(null);
 	const [activeSlide, setActiveSlide] = useState(0);
@@ -83,7 +84,7 @@ const ProductsCarousel = () => {
 		<View>
 			<Carousel
 				ref={carouselRef}
-				data={dummyData}
+				data={products}
 				renderItem={renderItem}
 				sliderWidth={width}
 				itemWidth={width}

@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import authReducer from './auth/reducers';
 import movementsReducer from './movements/reducers';
 import errorReducer from './common/reducers';
+import productsReducer from './products/reducers';
 
 const reducers = combineReducers({
 	auth: authReducer,
 	common: errorReducer,
 	movements: movementsReducer,
+	products: productsReducer,
 });
 
 // Export reducers return type to use in selectors

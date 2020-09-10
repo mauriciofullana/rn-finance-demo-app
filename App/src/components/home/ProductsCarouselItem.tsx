@@ -2,9 +2,10 @@ import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../styles';
 import * as Animatable from 'react-native-animatable';
+import { IProduct } from '../../state/products/types';
 
 interface IProductsCarouselItemProps {
-	item: any;
+	item: IProduct;
 	active: boolean;
 	fedeInRight: boolean;
 }
@@ -26,12 +27,12 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 					>
 						<Text
 							style={styles.header}
-						>{`${item.type}  ${item.accountNumber}`}</Text>
+						>{`${item.productType}  ${item.productNumber}`}</Text>
 					</Animatable.Text>
 				)}
 			</View>
 			<View style={styles.amountContainer}>
-				<Text style={styles.amountText}>{item.amount}</Text>
+				<Text style={styles.amountText}>{item.balance}</Text>
 				<Text style={styles.currencyText}>{item.currency}</Text>
 			</View>
 		</View>

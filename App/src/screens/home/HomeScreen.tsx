@@ -3,11 +3,12 @@ import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { movements as movementsAction } from '../../state/movements/actions';
+import { products as productsAction } from '../../state/products/actions';
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/home/types';
 import RecentTransactions from '../../components/home/RecentTransactions';
 import ProductsCarousel from '../../components/home/ProductsCarousel';
-import { movementsSelector } from '../../state/selectors';
+import { movementsSelector, productsSelector } from '../../state/selectors';
 import { Ionicons } from '@expo/vector-icons';
 import { baseFontSize } from '../../styles/typography';
 
@@ -18,14 +19,19 @@ interface HomeScreenProps {
 const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const { movements } = useSelector(movementsSelector);
+	const { products } = useSelector(productsSelector);
 
 	useEffect(() => {
+		dispatch(productsAction());
 		dispatch(movementsAction());
 	}, [dispatch]);
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.accountsLinkContainer} onPress={()=>navigation.navigate('ProductsList')}>
+			<TouchableOpacity
+				style={styles.accountsLinkContainer}
+				onPress={() => navigation.navigate('ProductsList')}
+			>
 				<Text style={styles.accountsLinkText}>MIS CUENTAS</Text>
 				<Ionicons
 					style={{ paddingTop: 0.7 }}
@@ -35,7 +41,7 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 				/>
 			</TouchableOpacity>
 			<View style={styles.productsCarouselContainer}>
-				<ProductsCarousel />
+				<ProductsCarousel products={products} />
 			</View>
 
 			<View style={styles.recentTrasnsactionsContainer}>
