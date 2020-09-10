@@ -3,6 +3,7 @@ import { AsyncStorage } from 'react-native';
 
 // Create instance
 let instance = axios.create({
+	//baseURL: 'http://localhost:3005',
 	baseURL: 'https://apps-restapi.herokuapp.com',
 });
 

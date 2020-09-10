@@ -47,7 +47,7 @@ const Welcome: FunctionComponent = () => {
 			>
 				<Image
 					style={styles.img}
-					source={require('../../../assets/chino.png')}
+					source={require('../../../assets/pic.jpeg')}
 				/>
 				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} /> */}
 			</View>

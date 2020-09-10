@@ -33,7 +33,7 @@ const UserProfileScreen: FunctionComponent = () => {
 				>
 					<Image
 						style={styles.img}
-						source={require('../../../assets/chino.png')}
+						source={require('../../../assets/pic.jpeg')}
 					/>
 				</TouchableOpacity>
 				<UserForm
