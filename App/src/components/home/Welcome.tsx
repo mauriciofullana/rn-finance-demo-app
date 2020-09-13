@@ -6,7 +6,11 @@ import * as Permissions from 'expo-permissions';
 import { FontAwesome } from '@expo/vector-icons';
 
 import { Colors } from '../../styles';
-import { smallestFontSize } from '../../styles/typography';
+import {
+	smallestFontSize,
+	largeFontSize,
+	baseFontSize,
+} from '../../styles/typography';
 import { authSelector } from '../../state/selectors';
 
 const Welcome: FunctionComponent = () => {
@@ -49,13 +53,12 @@ const Welcome: FunctionComponent = () => {
 					style={styles.img}
 					source={require('../../../assets/pic.jpeg')}
 				/>
-				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} /> */}
-			</View>
-			<View style={styles.headerContainer}>
 				<Text
 					style={styles.headerSecond}
 				>{`${user?.name} ${user?.lastName}`}</Text>
+				{/* <FontAwesome name="user-circle-o" color={Colors.lightGray} size={90} /> */}
 			</View>
+			{/* <View style={styles.headerContainer}></View> */}
 			<View>
 				<Text style={styles.lastAccess}>Último acceso: 20 May 14:48</Text>
 				<Text style={styles.lastPassChange}>
@@ -72,14 +75,21 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	welcomePicContainer: {
-		justifyContent: 'center',
+		width: '100%',
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginVertical: 20,
+		paddingHorizontal: 20,
+		// justifyContent: 'flex-end',
+		//justifyContent: 'center',
 	},
 	img: {
-		width: 100,
-		height: 100,
-		borderRadius: 50,
+		width: 70,
+		height: 70,
+		borderRadius: 35,
 		borderColor: Colors.mediumGray,
 		borderWidth: 1,
+		marginRight: 10,
 	},
 	headerContainer: {
 		flexDirection: 'row',
@@ -89,6 +99,7 @@ const styles = StyleSheet.create({
 		color: Colors.lightGray,
 	},
 	headerSecond: {
+		fontSize: 16,
 		fontWeight: 'bold',
 		color: Colors.lightGray,
 	},
