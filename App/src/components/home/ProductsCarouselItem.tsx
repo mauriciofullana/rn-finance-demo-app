@@ -17,7 +17,13 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 }) => {
 	return (
 		<View style={styles.container}>
-			<View style={{ height: 20 }}>
+			<View style={styles.amountContainer}>
+				<Text style={styles.currencyText}>
+					{item.currency == 'UYU' ? '$' : 'US$'}
+				</Text>
+				<Text style={styles.amountText}>{item.balance}</Text>
+			</View>
+			<View style={{ height: 20, marginBottom: 10 }}>
 				{active && (
 					<Animatable.Text
 						duration={fedeInRight ? 500 : 300}
@@ -31,21 +37,18 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 					</Animatable.Text>
 				)}
 			</View>
-			<View style={styles.amountContainer}>
-				<Text style={styles.amountText}>{item.balance}</Text>
-				<Text style={styles.currencyText}>{item.currency}</Text>
-			</View>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		height: 130,
+		height: 110,
 		width: '100%',
+		alignItems: 'center',
 		justifyContent: 'center',
 		borderRadius: 10,
-		paddingLeft: 30,
+		// paddingLeft: 30,
 	},
 	header: {
 		color: Colors.baseText,
@@ -53,16 +56,16 @@ const styles = StyleSheet.create({
 	amountContainer: {
 		flexDirection: 'row',
 		alignItems: 'flex-end',
+		marginBottom: 10,
 	},
 	amountText: {
 		color: Colors.baseText,
 		fontSize: 40,
-		marginRight: 7,
 	},
 	currencyText: {
 		color: Colors.baseText,
-		fontSize: 25,
-		paddingBottom: 3,
+		fontSize: 40,
+		marginRight: 7,
 	},
 });
 
