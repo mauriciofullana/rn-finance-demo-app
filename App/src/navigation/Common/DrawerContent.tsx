@@ -12,9 +12,7 @@ import {
 	MaterialIcons,
 } from '@expo/vector-icons';
 import { useDispatch } from 'react-redux';
-import {
-	DrawerActions,
-} from '@react-navigation/native';
+import { DrawerActions } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { logout } from '../../state/auth/actions';
@@ -99,13 +97,19 @@ export default function DrawerContent(
 				</View>
 			</DrawerContentScrollView>
 			<DrawerItem
-				style={{ marginBottom: 10 }}
+				style={{
+					marginBottom: 10,
+					marginLeft: 12,
+					borderTopColor: Colors.darkestGray,
+					borderTopWidth: 1,
+				}}
+				labelStyle={{ fontWeight: 'bold' }}
 				label="Salir"
-				inactiveTintColor={Colors.lightGray}
+				inactiveTintColor={Colors.darkestGray}
 				activeTintColor={Colors.main}
 				onPress={() => handleLogOut()}
 				icon={() => (
-					<Ionicons name="ios-log-out" size={28} color={Colors.lightGray} />
+					<Ionicons name="ios-log-out" size={28} color={Colors.darkestGray} />
 				)}
 			/>
 		</View>

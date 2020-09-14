@@ -1,5 +1,12 @@
 import React, { useState, FunctionComponent } from 'react';
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
+import {
+	View,
+	Text,
+	StyleSheet,
+	FlatList,
+	Button,
+	TouchableOpacity,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import {
 	Foundation,
@@ -11,11 +18,10 @@ import Modal from 'react-native-modal';
 import CheckBox from 'react-native-check-box';
 
 import SearchBar from '../../components/SearchBar';
-import { Colors, Buttons } from '../../styles';
+import { Colors } from '../../styles';
 import { productsSelector } from '../../state/selectors';
 import { IProduct } from '../../state/products/types';
 import { baseFontSize, largeFontSize } from '../../styles/typography';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { transparent } from '../../styles/colors';
 
 const ProductsListScreen: FunctionComponent = () => {
@@ -196,7 +202,6 @@ const ProductsListScreen: FunctionComponent = () => {
 							flexDirection: 'row',
 							justifyContent: 'center',
 							alignItems: 'center',
-							//height: 80,
 						}}
 					>
 						<View

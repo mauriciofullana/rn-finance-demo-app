@@ -14,6 +14,7 @@ import UserForm from '../../components/user/UserForm';
 import { authSelector } from '../../state/selectors';
 import { useSelector } from 'react-redux';
 import { updateUser } from '../../state/auth/actions';
+import { View } from 'react-native-animatable';
 
 const UserProfileScreen: FunctionComponent = () => {
 	const { user } = useSelector(authSelector);
@@ -31,10 +32,12 @@ const UserProfileScreen: FunctionComponent = () => {
 					style={styles.userPicContainer}
 					// onPress={takeImageHandler}
 				>
-					<Image
-						style={styles.img}
-						source={require('../../../assets/pic.jpeg')}
-					/>
+					<View style={styles.imgBorder}>
+						<Image
+							style={styles.img}
+							source={require('../../../assets/pic.jpeg')}
+						/>
+					</View>
 				</TouchableOpacity>
 				<UserForm
 					formButtonText="ACTUALIZAR"
@@ -60,19 +63,24 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: Colors.screenBackground,
 		paddingHorizontal: pageHorizontalPadding,
-		paddingTop: pageTopPadding,
+	},
+	imgBorder: {
+		borderWidth: 1,
+		borderColor: Colors.main,
+		borderRadius: 75,
 	},
 	img: {
-		width: 140,
-		height: 140,
+		width: 130,
+		height: 130,
 		borderRadius: 75,
-		borderColor: Colors.mainOpacity,
+		borderColor: Colors.screenBackground,
 		borderWidth: 3,
 	},
 	userPicContainer: {
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginVertical: 15,
+		padding: 10,
 	},
 });
 
