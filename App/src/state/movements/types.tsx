@@ -8,6 +8,7 @@ export interface IMovement {
 	date: Date;
 	userId: string;
 	amount: Number;
+	productId: string;
 }
 
 export interface IMovementsState {

@@ -5,6 +5,7 @@ import {
 	FlatList,
 	TouchableOpacity,
 	StyleSheet,
+	Animated,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
@@ -19,7 +20,7 @@ import {
 } from '../../styles/typography';
 import { containerRaduis } from '../../styles/spacing';
 
-interface IRecentTransactionsProps {
+interface IRecentMovementsProps {
 	movements: IMovement[];
 }
 
@@ -27,29 +28,56 @@ const FILTER_ALL = 'FILTER_ALL';
 const FILTER_PAYMENTS = 'FILTER_PAYMENTS';
 const FILTER_CHARGES = 'FILTER_CHARGES';
 
-const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
+const RecentMovements: FunctionComponent<IRecentMovementsProps> = ({
 	movements,
 }) => {
 	const [activeFilter, setActiveFilter] = useState<string>(FILTER_ALL);
 	const navigation = useNavigation<HomeScreenNavigationProp>();
+	const opacity = new Animated.Value(0);
+
+	Animated.timing(opacity, {
+		toValue: 1,
+		duration: 2500,
+		useNativeDriver: true,
+	}).start();
+
+	const renderNoMovements = () => {
+		return (
+			<View style={styles.noMovementsContainer}>
+				<Text style={styles.noMovementsText}>
+					No existen movimientos recientes
+				</Text>
+			</View>
+		);
+	};
 
 	const renderMovements = (movement: IMovement) => {
 		return (
-			<View style={styles.listItemContainer}>
-				<View style={styles.listItemInfoTextContainer}>
-					<Text style={styles.listItemHolderText}>{movement.holder}</Text>
-					<Text style={styles.listItemReferenceText}>{movement.reference}</Text>
+			<Animated.View
+				style={[
+					{
+						opacity,
+					},
+				]}
+			>
+				<View style={styles.listItemContainer}>
+					<View style={styles.listItemInfoTextContainer}>
+						<Text style={styles.listItemHolderText}>{movement.holder}</Text>
+						<Text style={styles.listItemReferenceText}>
+							{movement.reference}
+						</Text>
+					</View>
+					<View style={styles.listItemAmountContainer}>
+						<Text style={styles.listItemAmount}>USD {movement.amount}</Text>
+					</View>
+					<FontAwesome
+						style={styles.listItemIcon}
+						name={movement.isDebit ? 'caret-down' : 'caret-up'}
+						color={movement.isDebit ? Colors.red : Colors.green}
+						size={18}
+					/>
 				</View>
-				<View style={styles.listItemAmountContainer}>
-					<Text style={styles.listItemAmount}>USD {movement.amount}</Text>
-				</View>
-				<FontAwesome
-					style={styles.listItemIcon}
-					name={movement.isDebit ? 'caret-down' : 'caret-up'}
-					color={movement.isDebit ? Colors.red : Colors.green}
-					size={18}
-				/>
-			</View>
+			</Animated.View>
 		);
 	};
 
@@ -90,7 +118,7 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 		<View style={styles.container}>
 			<View style={styles.headerContainer}>
 				<View style={styles.headerTextContainer}>
-					<Text style={styles.headerMainText}>Transacciones recientes</Text>
+					<Text style={styles.headerMainText}>Últimos movimientos</Text>
 					<TouchableOpacity onPress={() => navigation.navigate('Movements')}>
 						<Text style={styles.headerSeeAllText}>Ver todas</Text>
 					</TouchableOpacity>
@@ -108,6 +136,7 @@ const RecentTransactions: FunctionComponent<IRecentTransactionsProps> = ({
 					renderItem={(movement) => renderMovements(movement.item)}
 					ItemSeparatorComponent={renderSeparator}
 					showsVerticalScrollIndicator={false}
+					ListEmptyComponent={renderNoMovements}
 				/>
 			</View>
 		</View>
@@ -120,6 +149,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		borderTopStartRadius: containerRaduis,
 		borderTopEndRadius: containerRaduis,
+	},
+	noMovementsContainer: {
+		marginTop: 25,
+		alignItems: 'center',
+	},
+	noMovementsText: {
+		color: Colors.mediumGray,
 	},
 	headerContainer: {
 		height: 90,
@@ -199,4 +235,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default RecentTransactions;
+export default RecentMovements;

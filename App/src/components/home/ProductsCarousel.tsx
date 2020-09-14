@@ -8,10 +8,12 @@ import { IProduct } from '../../state/products/types';
 
 interface IProductsCarouselProps {
 	products: IProduct[];
+	selectedProductChange: Function;
 }
 
 const ProductsCarousel: FunctionComponent<IProductsCarouselProps> = ({
 	products,
+	selectedProductChange,
 }) => {
 	const { width, height } = Dimensions.get('window');
 	const carouselRef = useRef(null);
@@ -65,6 +67,7 @@ const ProductsCarousel: FunctionComponent<IProductsCarouselProps> = ({
 					setFedeInRight(() => {
 						return index > activeSlide;
 					});
+					selectedProductChange(products[index]._id);
 					setActiveSlide(index);
 				}}
 			/>

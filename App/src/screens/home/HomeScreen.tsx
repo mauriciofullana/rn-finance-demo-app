@@ -6,11 +6,12 @@ import { movements as movementsAction } from '../../state/movements/actions';
 import { products as productsAction } from '../../state/products/actions';
 import { Colors } from '../../styles';
 import { HomeScreenNavigationProp } from '../../navigation/home/types';
-import RecentTransactions from '../../components/home/RecentTransactions';
+import RecentMovements from '../../components/home/RecentMovements';
 import ProductsCarousel from '../../components/home/ProductsCarousel';
 import { movementsSelector, productsSelector } from '../../state/selectors';
 import { Ionicons } from '@expo/vector-icons';
 import { baseFontSize } from '../../styles/typography';
+import { IMovement } from '../../state/movements/types';
 
 interface HomeScreenProps {
 	navigation: HomeScreenNavigationProp;
@@ -18,8 +19,22 @@ interface HomeScreenProps {
 
 const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 	const dispatch = useDispatch();
+	const [activeProdutId, setActiveProdutId] = useState('');
 	const { movements } = useSelector(movementsSelector);
 	const { products } = useSelector(productsSelector);
+
+	var activeMovements: IMovement[] = [];
+	// MovementsFilter
+	if (movements.length > 0) {
+		activeMovements = movements.filter((movement) => {
+			if (activeProdutId === '') {
+				setActiveProdutId(products[0]._id);
+				return;
+			}
+
+			return movement.productId == activeProdutId;
+		});
+	}
 
 	useEffect(() => {
 		dispatch(productsAction());
@@ -41,11 +56,14 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 				/>
 			</TouchableOpacity>
 			<View style={styles.productsCarouselContainer}>
-				<ProductsCarousel products={products} />
+				<ProductsCarousel
+					products={products}
+					selectedProductChange={setActiveProdutId}
+				/>
 			</View>
 
 			<View style={styles.recentTrasnsactionsContainer}>
-				<RecentTransactions movements={movements} />
+				<RecentMovements movements={activeMovements} />
 			</View>
 		</View>
 	);
