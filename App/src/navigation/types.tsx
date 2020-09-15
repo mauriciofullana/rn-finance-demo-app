@@ -3,6 +3,7 @@ import { DrawerNavigationProp } from '@react-navigation/drawer';
 export type DraweParamList = {
 	HomeScreen: undefined;
 	ProductsScreen: undefined;
+	Transfer: undefined;
 	Charge: undefined;
 	Pay: undefined;
 	Movements: undefined;

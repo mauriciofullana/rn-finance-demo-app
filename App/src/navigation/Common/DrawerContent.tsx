@@ -70,6 +70,13 @@ export default function DrawerContent(
 							size={26}
 						/>
 					))}
+					{renderDrawerItem('Transferir', 'TransferInital', true, () => (
+						<MaterialCommunityIcons
+							name="bank-transfer-out"
+							color={Colors.lightGray}
+							size={26}
+						/>
+					))}
 					{renderDrawerItem('Cobrar', 'ChargeList', true, () => (
 						<MaterialCommunityIcons
 							name="qrcode"
