@@ -70,14 +70,14 @@ export default function DrawerContent(
 							size={26}
 						/>
 					))}
-					{renderDrawerItem('Transferir', 'TransferInital', true, () => (
+					{renderDrawerItem('Transferir', 'Transfer', true, () => (
 						<MaterialCommunityIcons
 							name="bank-transfer-out"
 							color={Colors.lightGray}
 							size={26}
 						/>
 					))}
-					{renderDrawerItem('Cobrar', 'ChargeList', true, () => (
+					{/* {renderDrawerItem('Cobrar', 'ChargeList', true, () => (
 						<MaterialCommunityIcons
 							name="qrcode"
 							color={Colors.lightGray}
@@ -90,7 +90,7 @@ export default function DrawerContent(
 							color={Colors.lightGray}
 							size={26}
 						/>
-					))}
+					))} */}
 					{renderDrawerItem('Historial', 'Movements', true, () => (
 						<MaterialCommunityIcons
 							name="format-list-bulleted"
@@ -107,16 +107,16 @@ export default function DrawerContent(
 				style={{
 					marginBottom: 10,
 					marginLeft: 12,
-					borderTopColor: Colors.darkestGray,
-					borderTopWidth: 1,
+					borderTopColor: Colors.mediumGray,
+					borderTopWidth: 0.5,
 				}}
 				labelStyle={{ fontWeight: 'bold' }}
 				label="Salir"
-				inactiveTintColor={Colors.darkestGray}
+				inactiveTintColor={Colors.mediumGray}
 				activeTintColor={Colors.main}
 				onPress={() => handleLogOut()}
 				icon={() => (
-					<Ionicons name="ios-log-out" size={28} color={Colors.darkestGray} />
+					<Ionicons name="ios-log-out" size={28} color={Colors.mediumGray} />
 				)}
 			/>
 		</View>

@@ -69,7 +69,7 @@ const SignupScreen: FunctionComponent = () => {
 	return (
 		<KeyboardAvoidingView
 			style={styles.container}
-			behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+			//behavior={Platform.OS === 'ios' ? 'padding' : undefined}
 			enabled
 			keyboardVerticalOffset={keyboardVerticalOffset}
 		>

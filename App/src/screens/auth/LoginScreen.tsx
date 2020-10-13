@@ -9,7 +9,8 @@ import {
 	Switch,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, Feather } from '@expo/vector-icons';
+import * as Animatable from 'react-native-animatable';
 
 import { login } from '../../state/auth/actions';
 import { Colors, Buttons } from '../../styles';
@@ -40,19 +41,34 @@ const LoginScreen: FunctionComponent<LoginProps> = ({ navigation }) => {
 			style={styles.scrollContainer}
 			contentContainerStyle={{ flexGrow: 1 }}
 		>
-			<View style={styles.logoContainer}>
+			<Animatable.View
+				style={styles.logoContainer}
+				animation="bounceIn"
+				duration={1500}
+			>
 				<Image
 					style={styles.img}
-					source={require('../../../assets/logo2.png')}
+					source={require('../../../assets/logo.png')}
 				/>
-			</View>
+			</Animatable.View>
 			<View style={styles.formContainer}>
 				<FormInput
 					value={userName}
 					onChangeValue={setUsername}
 					placeHolderText="Usuario"
 					iconName="user"
-				/>
+				>
+					{userName.length > 0 ? (
+						<Animatable.View animation="bounceIn">
+							<Feather
+								style={styles.inputIcon}
+								name="check-circle"
+								color={Colors.green}
+								size={20}
+							/>
+						</Animatable.View>
+					) : null}
+				</FormInput>
 				<FormInput
 					value={password}
 					onChangeValue={setPassword}

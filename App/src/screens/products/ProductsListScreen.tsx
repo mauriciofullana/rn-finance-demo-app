@@ -4,7 +4,6 @@ import {
 	Text,
 	StyleSheet,
 	FlatList,
-	Button,
 	TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -152,7 +151,7 @@ const ProductsListScreen: FunctionComponent = () => {
 							justifyContent: 'center',
 						}}
 					>
-						<Text style={{ color: Colors.baseText }}>TIPO DE PRODUCTO</Text>
+						<Text style={{ color: Colors.mediumGray }}>TIPO DE PRODUCTO</Text>
 					</View>
 					<View style={{ borderColor: Colors.mediumGray, borderWidth: 0.3 }} />
 					<View style={{ justifyContent: 'center', marginTop: 30 }}>

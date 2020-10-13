@@ -24,7 +24,10 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 				<Text style={styles.amountText}>{item.balance}</Text>
 			</View>
 			<View style={{ height: 20, marginBottom: 10 }}>
-				{active && (
+				<Text style={styles.header}>{`${item.productType}  ${
+					'XXXX-' + item.productNumber.substr(item.productNumber.length - 3)
+				}`}</Text>
+				{/* {active && (
 					<Animatable.Text
 						duration={fedeInRight ? 500 : 300}
 						//style={styles.typeCount}
@@ -35,7 +38,7 @@ const ProductsCarouselItem: FunctionComponent<IProductsCarouselItemProps> = ({
 							'XXXX-' + item.productNumber.substr(item.productNumber.length - 3)
 						}`}</Text>
 					</Animatable.Text>
-				)}
+				)} */}
 			</View>
 		</View>
 	);

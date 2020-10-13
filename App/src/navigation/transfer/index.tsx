@@ -18,7 +18,7 @@ const TransferStackNavigator: FunctionComponent = () => {
 			<TransferStack.Screen
 				name="TransferInital"
 				component={TransferInitialScreen}
-				options={() => ScreenHeaderCommonOptions({ title: 'Transferencia cuentas propias' })}
+				options={() => ScreenHeaderCommonOptions({ title: 'Transferir' })}
 			/>
 		</TransferStack.Navigator>
 	);

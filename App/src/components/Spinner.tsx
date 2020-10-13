@@ -18,7 +18,7 @@ const bkSpinner: FunctionComponent<ISpinnerProps> = ({ text }) => {
 			visible={loading}
 			textContent={text}
 			textStyle={styles.spinnerTextStyle}
-			color="#ff4800"
+			color={Colors.main}
 			overlayColor="rgba(0, 0, 0, 0.50)"
 		/>
 	);

@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import * as Animatable from 'react-native-animatable';
 
 import { movements as movementsAction } from '../../state/movements/actions';
 import { products as productsAction } from '../../state/products/actions';
@@ -62,9 +63,14 @@ const HomeScreen: FunctionComponent<HomeScreenProps> = ({ navigation }) => {
 				/>
 			</View>
 
-			<View style={styles.recentTrasnsactionsContainer}>
-				<RecentMovements movements={activeMovements} />
-			</View>
+			{activeMovements.length > 0 && products.length > 0 ? (
+				<Animatable.View
+					style={styles.recentTrasnsactionsContainer}
+					animation="fadeInUpBig"
+				>
+					<RecentMovements movements={activeMovements} />
+				</Animatable.View>
+			) : null}
 		</View>
 	);
 };

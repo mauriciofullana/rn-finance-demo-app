@@ -1,6 +1,6 @@
 import * as Colors from './colors';
 
-export const extraLargeFontSize = 32;
+export const extraLargeFontSize = 40;
 export const largeFontSize = 18;
 export const buttonFontSize = 18;
 export const baseFontSize = 15;
