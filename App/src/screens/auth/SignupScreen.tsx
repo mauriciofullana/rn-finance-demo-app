@@ -12,6 +12,8 @@ import { pageHorizontalPadding, pageTopPadding } from '../../styles/spacing';
 import { signup } from '../../state/auth/actions';
 import FormButton from '../../components/form/FormButton';
 import FloatingTitleTextInput from '../../components/form/FloatingTitleTextInput';
+import { FloatingLabelInput } from 'react-native-floating-label-input';
+import FormFloatingLabelInput from '../../components/form/FormFloatingLabelInput';
 
 const SignupScreen: FunctionComponent = () => {
 	const [name, setName] = useState('');
@@ -74,46 +76,66 @@ const SignupScreen: FunctionComponent = () => {
 			keyboardVerticalOffset={keyboardVerticalOffset}
 		>
 			<ScrollView showsVerticalScrollIndicator={false}>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Nombre"
 					value={name}
-					onChangeValue={setName}
-					placeHolderText="Nombre"
-					errorMessage={''}
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setName}
+					required={true}
 				/>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Apellido"
 					value={lastName}
-					onChangeValue={setLastName}
-					placeHolderText="Apellido"
-					errorMessage={''}
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setLastName}
+					required={true}
 				/>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Correo electrónico"
 					value={email}
-					onChangeValue={setEmail}
-					placeHolderText="Correo electrónico"
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setEmail}
 					onEndEditingFunction={validateEmail}
 					errorMessage={emailErrorMessage}
+					required={true}
 				/>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Nombre de usuario"
 					value={userName}
-					onChangeValue={setUserName}
-					placeHolderText="Nombre de usuario"
-					errorMessage={''}
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setUserName}
+					required={true}
 				/>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Contraseña"
 					value={password}
-					onChangeValue={setPassword}
-					placeHolderText="Contraseña"
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setPassword}
 					secureTextEntry={true}
 					onEndEditingFunction={validateConfirmPassword}
-					errorMessage={''}
+					required={true}
 				/>
-				<FloatingTitleTextInput
+				<FormFloatingLabelInput
+					currencyDivider="."
+					label="Confirmación de contraseña"
 					value={confirmPassword}
-					onChangeValue={setConfirmPassword}
-					placeHolderText="Confirmación de contraseña"
+					blurOnSubmit={false}
+					maxLength={20}
+					onChangeText={setConfirmPassword}
 					secureTextEntry={true}
 					onEndEditingFunction={validateConfirmPassword}
 					errorMessage={confirmPasswordErrorMessage}
+					required={true}
 				/>
 				<FormButton
 					isDisabled={disabledSignup}
